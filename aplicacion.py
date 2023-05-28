@@ -39,7 +39,8 @@ opcionesMetodos = [
 clickedMetodos = tk.StringVar()
 clickedMetodos.set(opcionesMetodos[0])
 dropDownMetodos = tk.OptionMenu(root, clickedMetodos, *opcionesMetodos)
-dropDownMetodos.grid()
+dropDownMetodos.grid(sticky="")
+root.grid_columnconfigure(0, weight=1)
 
 
 siguiente = tk.Button(root, text="Siguiente",
