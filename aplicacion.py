@@ -47,5 +47,4 @@ siguiente = tk.Button(root, text="Siguiente",
                       command=lambda: definirMetodo(root, clickedMetodos.get()))
 siguiente.grid()
 
-
 root.mainloop()
