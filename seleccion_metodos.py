@@ -101,6 +101,46 @@ def definirMetodo(root, metodo):
                 bEntry.get()), float(tolEntry.get()),
             int(NmaxEntry.get()), root, operaciones, errorSeleccionado.get(), atras))
         calcular.grid()
+    elif metodo == "Busqueda incremental":
+        print("Busqueda incremental")
+    elif metodo == "Newton":
+        print("Newton")
+    elif metodo == "Punto fijo":
+        print("Punto fijo")
+    elif metodo == "Raices multiples":
+        print("Raices multiples")
+    elif metodo == "Secante":
+        print("Secante")
+    elif metodo == "Regla falsa":
+        print("Regla falsa")
+    elif metodo == "Cholesky":
+        print("Cholesky")
+    elif metodo == "Crout":
+        print("Crout")
+    elif metodo == "Doolittle":
+        print("Doolittle")
+    elif metodo == "Gauss simple":
+        print("Gauss simple")
+    elif metodo == "Gauss con pivoteo parcial":
+        print("Gauss con pivoteo parcial")
+    elif metodo == "Gauss con pivoteo total":
+        print("Gauss con pivoteo total")
+    elif metodo == "Gauss-Seidel":
+        print("Gauss-Seidel")
+    elif metodo == "Jacobi":
+        print("Jacobi")
+    elif metodo == "LU parcial":
+        print("LU parcial")
+    elif metodo == "LU simple":
+        print("LU simple")
+    elif metodo == "LaGrange":
+        print("LaGrange")
+    elif metodo == "Newton":
+        print("Newton")
+    elif metodo == "Spline":
+        print("Spline")
+    elif metodo == "Vandermonde":
+        print("Vandermonde")
 
     atras = tk.Button(root, text="Atras", command=lambda: inicio(root))
     atras.grid()
