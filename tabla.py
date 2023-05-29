@@ -14,6 +14,3 @@ def tabla(lst, root):
 
             e.grid(row=i+1, column=j)
             e.insert(END, lst[i][j])
-
-    scrollx = Scrollbar(root, orient=HORIZONTAL)
-    scrollx.grid(sticky=S)

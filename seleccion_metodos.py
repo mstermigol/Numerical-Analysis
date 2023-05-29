@@ -95,9 +95,13 @@ def definirMetodo(root, metodo):
 
         dropdown = tk.OptionMenu(root, errorSeleccionado, *error)
         dropdown.grid()
+        """
+        calcular = tk.Button(root, text="Calcular", command=lambda: biseccion(
+            funcionEntry.get(), float(aEntry.get()), float(bEntry.get()), float(tolEntry.get()), int(NmaxEntry.get()), root, operaciones, errorSeleccionado.get()))"""
 
         calcular = tk.Button(root, text="Calcular", command=lambda: biseccion(
-            funcionEntry.get(), float(aEntry.get()), float(bEntry.get()), float(tolEntry.get()), int(NmaxEntry.get()), root, operaciones, errorSeleccionado.get()))
+            "exp(x)-2", 0, 2, 0.0001, 100, root, operaciones, errorSeleccionado.get()))
+
         calcular.grid()
 
     atras = tk.Button(root, text="Atras", command=lambda: inicio(root))

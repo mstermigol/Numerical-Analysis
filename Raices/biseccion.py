@@ -17,11 +17,12 @@ def biseccionRelativo(f, a, b, tol, Nmax, root, operaciones):
     fb = eval(f, operaciones, {'x': b})
     valorMedio = (a + b) / 2
     fValorMedio = eval(f, operaciones, {'x': valorMedio})
+    E = abs(a - valorMedio)
     e = E / valorMedio
-    resultados.append([0, a, fa, valorMedio, fValorMedio, b, fb, E, e])
+    resultados.append([0, a, fa, valorMedio, fValorMedio, b, fb, e])
     cont = 1
 
-    while e > tol and cont < Nmax:
+    while abs(e) > tol and cont < Nmax:
         if fa * fValorMedio < 0:
             b = valorMedio
         else:
@@ -31,6 +32,7 @@ def biseccionRelativo(f, a, b, tol, Nmax, root, operaciones):
         p0 = valorMedio
         valorMedio = (a + b) / 2
         fValorMedio = eval(f, operaciones, {'x': valorMedio})
+        E = abs(valorMedio - p0)
         e = E / valorMedio
         resultados.append([cont, a, fa, valorMedio, fValorMedio, b, fb, e])
         cont += 1
@@ -67,7 +69,7 @@ def biseccionRelativo(f, a, b, tol, Nmax, root, operaciones):
     e.insert(END, "f(b)")
 
     e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
-    e.grid(row=0, column=8)
+    e.grid(row=0, column=7)
     e.insert(END, "e")
 
     t = tabla(resultados, root)
