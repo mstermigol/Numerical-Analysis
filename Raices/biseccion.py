@@ -39,7 +39,6 @@ def biseccionRelativo(f, a, b, tol, Nmax, root, operaciones, atras):
 
     for widget in root.winfo_children():
         if widget != atras:
-            print(widget)
             widget.destroy()
 
     e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
@@ -103,7 +102,6 @@ def biseccionAbsoluto(f, a, b, tol, Nmax, root, operaciones, atras):
 
     for widget in root.winfo_children():
         if widget != atras:
-            print(widget)
             widget.destroy()
 
     e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
