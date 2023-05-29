@@ -1,7 +1,7 @@
 from tkinter import *
 
 
-def tabla(lst, root):
+def tabla(lst, root, atras):
     total_rows = len(lst)
     total_columns = len(lst[0])
 
@@ -14,3 +14,6 @@ def tabla(lst, root):
 
             e.grid(row=i+1, column=j)
             e.insert(END, lst[i][j])
+
+    atras.grid(row=total_rows+2, column=0)
+    root.grid_rowconfigure(total_rows+2, weight=1)

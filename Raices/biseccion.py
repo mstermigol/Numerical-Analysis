@@ -4,14 +4,14 @@ from tabla import tabla
 from tkinter import *
 
 
-def biseccion(f, a, b, tol, Nmax, root, operaciones, error):
+def biseccion(f, a, b, tol, Nmax, root, operaciones, error, atras):
     if error == "Error absoluto":
-        biseccionAbsoluto(f, a, b, tol, Nmax, root, operaciones)
+        biseccionAbsoluto(f, a, b, tol, Nmax, root, operaciones, atras)
     else:
         biseccionRelativo(f, a, b, tol, Nmax, root, operaciones)
 
 
-def biseccionRelativo(f, a, b, tol, Nmax, root, operaciones):
+def biseccionRelativo(f, a, b, tol, Nmax, root, operaciones, atras):
     resultados = []
     fa = eval(f, operaciones, {'x': a})
     fb = eval(f, operaciones, {'x': b})
@@ -38,7 +38,9 @@ def biseccionRelativo(f, a, b, tol, Nmax, root, operaciones):
         cont += 1
 
     for widget in root.winfo_children():
-        widget.destroy()
+        if widget != atras:
+            print(widget)
+            widget.destroy()
 
     e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
     e.grid(row=0, column=0)
@@ -72,10 +74,10 @@ def biseccionRelativo(f, a, b, tol, Nmax, root, operaciones):
     e.grid(row=0, column=7)
     e.insert(END, "e")
 
-    t = tabla(resultados, root)
+    t = tabla(resultados, root, atras)
 
 
-def biseccionAbsoluto(f, a, b, tol, Nmax, root, operaciones):
+def biseccionAbsoluto(f, a, b, tol, Nmax, root, operaciones, atras):
     resultados = []
     fa = eval(f, operaciones, {'x': a})
     fb = eval(f, operaciones, {'x': b})
@@ -100,7 +102,9 @@ def biseccionAbsoluto(f, a, b, tol, Nmax, root, operaciones):
         cont += 1
 
     for widget in root.winfo_children():
-        widget.destroy()
+        if widget != atras:
+            print(widget)
+            widget.destroy()
 
     e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
     e.grid(row=0, column=0)
@@ -134,7 +138,7 @@ def biseccionAbsoluto(f, a, b, tol, Nmax, root, operaciones):
     e.grid(row=0, column=7)
     e.insert(END, "E")
 
-    t = tabla(resultados, root)
+    t = tabla(resultados, root, atras)
 
 
 def numero_de_iteraciones(a, b, E):

@@ -4,7 +4,7 @@ from math import *
 
 root = tk.Tk()
 
-root.geometry("1500x700")
+root.geometry("800x600")
 root.title("Metodos numéricos")
 
 opcionesMetodos = [
@@ -100,7 +100,7 @@ def definirMetodo(root, metodo):
             funcionEntry.get(), float(aEntry.get()), float(bEntry.get()), float(tolEntry.get()), int(NmaxEntry.get()), root, operaciones, errorSeleccionado.get()))"""
 
         calcular = tk.Button(root, text="Calcular", command=lambda: biseccion(
-            "exp(x)-2", 0, 2, 0.0001, 100, root, operaciones, errorSeleccionado.get()))
+            "exp(x)-2", 0, 2, 0.0001, 100, root, operaciones, errorSeleccionado.get(), atras))
 
         calcular.grid()
 
