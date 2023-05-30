@@ -8,7 +8,7 @@ def biseccion(f, a, b, tol, Nmax, root, operaciones, error, atras):
     if error == "Error absoluto":
         biseccionAbsoluto(f, a, b, tol, Nmax, root, operaciones, atras)
     else:
-        biseccionRelativo(f, a, b, tol, Nmax, root, operaciones)
+        biseccionRelativo(f, a, b, tol, Nmax, root, operaciones, atras)
 
 
 def biseccionRelativo(f, a, b, tol, Nmax, root, operaciones, atras):
