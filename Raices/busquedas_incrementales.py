@@ -19,7 +19,7 @@ def busquedas(f, x0, h, Nmax, root, operaciones, atras):
         fActual = eval(f, operaciones, {'x': xActual})
         cont += 1
 
-        lista = [[xAnterior, xActual, h]]
+    lista = [[xAnterior, xActual, h]]
 
     for widget in root.winfo_children():
         if widget != atras:

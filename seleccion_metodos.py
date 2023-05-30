@@ -2,6 +2,7 @@ import tkinter as tk
 from Raices.biseccion import biseccion
 from Raices.busquedas_incrementales import busquedas
 from Interpolacion.Lagrange import lagrange
+from Raices.newton import newton_lambda
 from math import *
 
 root = tk.Tk()
@@ -187,6 +188,38 @@ def definirMetodo(root, metodo):
             xEntry.get(), yEntry.get(), float(puntoEntry.get()), root, atras))
         calcular.grid()
     elif metodo == "Newton":
+        label = tk.Label(root, text="Newton", font=("Arial", 20))
+        label.grid()
+
+        f = tk.Label(root, text="Ingrese la función")
+        f.grid()
+        fEntry = tk.Entry(root)
+        fEntry.grid()
+
+        derivada = tk.Label(root, text="Ingrese la derivada")
+        derivada.grid()
+        derivadaEntry = tk.Entry(root)
+        derivadaEntry.grid()
+
+        x0 = tk.Label(root, text="Ingrese el valor de x0")
+        x0.grid()
+        x0Entry = tk.Entry(root)
+        x0Entry.grid()
+
+        tol = tk.Label(root, text="Ingrese el valor de la tolerancia")
+        tol.grid()
+        tolEntry = tk.Entry(root)
+        tolEntry.grid()
+
+        Nmax = tk.Label(root, text="Ingrese el valor de Nmax")
+        Nmax.grid()
+        NmaxEntry = tk.Entry(root)
+        NmaxEntry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: newton_lambda(
+            fEntry.get(), derivadaEntry.get(), float(x0Entry.get()), float(tolEntry.get()), int(NmaxEntry.get()), root, operaciones, atras))
+        calcular.grid()
+
         print("Newton")
     elif metodo == "Spline":
         print("Spline")
