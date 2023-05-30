@@ -360,7 +360,7 @@ def definirMetodo(root, metodo):
             # Mostrar los resultados en la interfaz de Tkinter
             x_result.config(text="Valores de x: " + str(x))
 
-        label = tk.Label(root, text="Eliminación Gaussiana", font=("Arial", 20))
+        label = tk.Label(root, text="LU parcial", font=("Arial", 20))
         label.grid()
 
         A_label = tk.Label(root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")

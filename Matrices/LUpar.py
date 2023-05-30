@@ -1,6 +1,6 @@
 import numpy as np
-from sustprgr import sustprgr
-from sustregr import sustregr
+from Matrices.sustprgr import sustprgr
+from Matrices.sustregr import sustregr
 
 
 def LUparcial(A, b):
@@ -45,7 +45,7 @@ def LUparcial(A, b):
     #print("\nValores de x: ")
     return x
 
-
+"""
 A = np.array([[4, -1, -2],
               [1, -8, 2],
              [-2, 1, 5]])
@@ -54,4 +54,4 @@ b = np.array([1, 0, 0])
 
 
 print(LUparcial(A, b))
-
+"""
