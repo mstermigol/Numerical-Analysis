@@ -1,9 +1,26 @@
 import sympy as sp
 import numpy as np
+from tkinter import *
+from PIL import ImageTk, Image
 
 
-def newton(x, y, puntos):
+def newtonInterpolacion(x, y, puntos, root, atras):
+    for widget in root.winfo_children():
+        if widget != atras:
+            widget.destroy()
+    atras.grid_forget()
+
+    label = Label(root, text="Interpolación de Newton", font=("Arial", 20))
+
     xs = sp.symbols('x')
+    x = x.split(",")
+    y = y.split(",")
+    puntos = puntos.split(",")
+    for i in range(len(x)):
+        x[i] = float(x[i])
+        y[i] = float(y[i])
+    for i in range(len(puntos)):
+        puntos[i] = float(puntos[i])
 
     a = []
     for i in range(len(x)+1):
@@ -27,11 +44,6 @@ def newton(x, y, puntos):
         c += 1
         d += 1
 
-    print("\n Tabla de diferencias divididas: ")
-    matriz = np.array(a)
-    matriz_t = np.transpose(matriz)
-    print(matriz_t)
-
     p = 0
     w = 0
     for i in range(len(a[0])):
@@ -42,14 +54,16 @@ def newton(x, y, puntos):
         w += 1
         pol = sp.simplify(p)
 
-    print("\nPolinomio de Newton: ")
-    print(pol)
+    polinomio = Label(root, text="Polinomio: " + str(pol))
+    polinomio.grid()
 
     for punto in puntos:
-        print(f"\nValor de x = {punto}: {pol.subs(xs, punto)}")
+        label = Label(root, text="P(" + str(punto) + ") = " +
+                      str(pol.subs(xs, punto)))
+        label.grid()
+
+    atras.grid()
 
 
 x = [-1, 0, 1, 2]
 y = [1, 2, -1, 10]
-
-newton(x, y, [1.5])

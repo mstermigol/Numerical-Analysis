@@ -2,7 +2,12 @@ import tkinter as tk
 from Raices.biseccion import biseccion
 from Raices.busquedas_incrementales import busquedas
 from Interpolacion.Lagrange import lagrange
+<<<<<<< HEAD
 from Raices.newton import newton_lambda
+=======
+from Interpolacion.Newton import newtonInterpolacion
+from Interpolacion.Vandermonde import vandermonde
+>>>>>>> c1a95791265e41ddbaa0aa313e05e05ac5d56237
 from math import *
 
 root = tk.Tk()
@@ -29,8 +34,7 @@ opcionesMetodos = [
     "LU parcial",
     "LU simple",
     "LaGrange",
-    "Newton",
-    "Spline",
+    "Diferencias divididas",
     "Vandermonde"
 ]
 
@@ -187,6 +191,7 @@ def definirMetodo(root, metodo):
         calcular = tk.Button(root, text="Calcular", command=lambda: lagrange(
             xEntry.get(), yEntry.get(), float(puntoEntry.get()), root, atras))
         calcular.grid()
+<<<<<<< HEAD
     elif metodo == "Newton":
         label = tk.Label(root, text="Newton", font=("Arial", 20))
         label.grid()
@@ -223,8 +228,56 @@ def definirMetodo(root, metodo):
         print("Newton")
     elif metodo == "Spline":
         print("Spline")
+=======
+    elif metodo == "Diferencias divididas":
+        label = tk.Label(root, text="Diferencias divididas",
+                         font=("Arial", 20))
+        label.grid()
+
+        x = tk.Label(root, text="Ingrese los valores de x separados por comas")
+        x.grid()
+        xEntry = tk.Entry(root)
+        xEntry.grid()
+
+        y = tk.Label(root, text="Ingrese los valores de y separados por comas")
+        y.grid()
+        yEntry = tk.Entry(root)
+        yEntry.grid()
+
+        punto = tk.Label(
+            root, text="Ingrese los puntos a evaluar separados por comas")
+        punto.grid()
+        puntoEntry = tk.Entry(root)
+        puntoEntry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: newtonInterpolacion(
+            xEntry.get(), yEntry.get(), str(puntoEntry.get()), root, atras))
+        calcular.grid()
+
+>>>>>>> c1a95791265e41ddbaa0aa313e05e05ac5d56237
     elif metodo == "Vandermonde":
-        print("Vandermonde")
+        label = tk.Label(root, text="Vandermonde", font=("Arial", 20))
+        label.grid()
+
+        x = tk.Label(root, text="Ingrese los valores de x separados por comas")
+        x.grid()
+        xEntry = tk.Entry(root)
+        xEntry.grid()
+
+        y = tk.Label(root, text="Ingrese los valores de y separados por comas")
+        y.grid()
+        yEntry = tk.Entry(root)
+        yEntry.grid()
+
+        puntos = tk.Label(
+            root, text="Ingrese los puntos a evaluar separados por comas")
+        puntos.grid()
+        puntosEntry = tk.Entry(root)
+        puntosEntry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: vandermonde(
+            xEntry.get(), yEntry.get(), str(puntosEntry.get()), root, atras))
+        calcular.grid()
 
     atras = tk.Button(root, text="Atras", command=lambda: inicio(root))
     atras.grid()
