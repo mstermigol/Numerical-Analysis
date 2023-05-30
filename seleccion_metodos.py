@@ -1,5 +1,6 @@
 import tkinter as tk
 from Raices.biseccion import biseccion
+from Raices.busquedas_incrementales import busquedas
 from math import *
 
 root = tk.Tk()
@@ -101,7 +102,35 @@ def definirMetodo(root, metodo):
                 bEntry.get()), float(tolEntry.get()),
             int(NmaxEntry.get()), root, operaciones, errorSeleccionado.get(), atras))
         calcular.grid()
+
     elif metodo == "Busqueda incremental":
+        label = tk.Label(root, text="Busqueda incremental", font=("Arial", 20))
+        label.grid()
+
+        funcion = tk.Label(root, text="Ingrese la función")
+        funcion.grid()
+        funcionEntry = tk.Entry(root)
+        funcionEntry.grid()
+
+        x0 = tk.Label(root, text="Ingrese el valor de x0")
+        x0.grid()
+        x0Entry = tk.Entry(root)
+        x0Entry.grid()
+
+        h = tk.Label(root, text="Ingrese el valor de h")
+        h.grid()
+        hEntry = tk.Entry(root)
+        hEntry.grid()
+
+        Nmax = tk.Label(root, text="Ingrese el valor de Nmax")
+        Nmax.grid()
+        NmaxEntry = tk.Entry(root)
+        NmaxEntry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: busquedas(
+            funcionEntry.get(), float(x0Entry.get()), float(hEntry.get()), int(NmaxEntry.get()), root, operaciones, atras))
+        calcular.grid()
+
         print("Busqueda incremental")
     elif metodo == "Newton":
         print("Newton")
