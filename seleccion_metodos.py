@@ -7,6 +7,8 @@ from Interpolacion.Newton import newtonInterpolacion
 from Interpolacion.Vandermonde import vandermonde
 from Matrices.gausspl import gausspl
 from Matrices.Jacobi import jacobi
+from Matrices.gseidel import gseidel
+from Matrices.LUpar import LUparcial
 import numpy as np
 from math import *
 
@@ -236,7 +238,7 @@ def definirMetodo(root, metodo):
             tol = float(tol_str)
             Nmax = int(Nmax_str)
 
-            result = jacobi(A, b, X0, tol, Nmax)
+            result = gseidel(A, b, X0, tol, Nmax)
 
             x_result.config(text="Valores de x: " + str(result[0]))
             iter_result.config(text="Número de iteraciones: " + str(result[1]))
@@ -346,6 +348,40 @@ def definirMetodo(root, metodo):
         error_result = tk.Label(root, text="Error:")
         error_result.grid()
     elif metodo == "LU parcial":
+        def calcularLuPar(A_str, b_str):
+            A_rows = A_str.split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+            b = np.array(list(map(float, b_str.split(','))))
+
+            # Llamar a la función de eliminación gaussiana con las entradas proporcionadas
+            x = LUparcial(A, b)
+
+            # Mostrar los resultados en la interfaz de Tkinter
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(root, text="Eliminación Gaussiana", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: calcularLuPar(
+            A_entry.get(), b_entry.get()))
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
         print("LU parcial")
     elif metodo == "LU simple":
         print("LU simple")

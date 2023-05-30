@@ -25,9 +25,6 @@ err=E;
 end"""
 
 import numpy as np
-from sustregr import sustregr
-from sustprgr import sustprgr
-
 
 def gseidel(A, b, x0, tol, Nmax):
     D = np.diag(np.diag(A))
