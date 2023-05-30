@@ -188,33 +188,40 @@ def definirMetodo(root, metodo):
     elif metodo == "Doolittle":
         print("Doolittle")
     elif metodo == "Gauss simple":
-        label = tk.Label(root, text="Gauss simple", font=("Arial", 20))
+        def calcularGauss(A_str, b_str):
+            A_rows = A_str.split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+            b = np.array(list(map(float, b_str.split(','))))
+
+            # Llamar a la función de eliminación gaussiana con las entradas proporcionadas
+            x = gausspl(A, b)
+
+            # Mostrar los resultados en la interfaz de Tkinter
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(root, text="Eliminación Gaussiana", font=("Arial", 20))
         label.grid()
 
-        a = tk.Label(root, text="Ingrese la fila a separada por comas")
-        a.grid()
-        aEntry = tk.Entry(root)
-        aEntry.grid()
+        A_label = tk.Label(root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
 
-        b = tk.Label(root, text="Ingrese la fila b separada por comas")
-        b.grid()
-        bEntry = tk.Entry(root)
-        bEntry.grid()
+        b_label = tk.Label(root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
 
-        c = tk.Label(root, text="Ingrese la fila c separada por comas")
-        c.grid()
-        cEntry = tk.Entry(root)
-        cEntry.grid()
-
-        d = tk.Label(root, text="Ingrese el vector d separad0 por comas")
-        d.grid()
-        dEntry = tk.Entry(root)
-        dEntry.grid()
-
-        calcular = tk.Button(root, text="Calcular", command=lambda: gausspl(
-            aEntry.get(), bEntry.get(), cEntry.get(), dEntry.get(), root, atras))
+        calcular = tk.Button(root, text="Calcular", command=lambda: calcularGauss(
+            A_entry.get(), b_entry.get()))
         calcular.grid()
-        print("Gauss simple")
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
     elif metodo == "Gauss con pivoteo parcial":
         print("Gauss con pivoteo parcial")
     elif metodo == "Gauss con pivoteo total":
