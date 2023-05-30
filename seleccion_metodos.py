@@ -3,6 +3,7 @@ from Raices.biseccion import biseccion
 from Raices.busquedas_incrementales import busquedas
 from Interpolacion.Lagrange import lagrange
 from Interpolacion.Newton import newtonInterpolacion
+from Interpolacion.Vandermonde import vandermonde
 from math import *
 
 root = tk.Tk()
@@ -211,10 +212,29 @@ def definirMetodo(root, metodo):
             xEntry.get(), yEntry.get(), str(puntoEntry.get()), root, atras))
         calcular.grid()
 
-    elif metodo == "Spline":
-        print("Spline")
     elif metodo == "Vandermonde":
-        print("Vandermonde")
+        label = tk.Label(root, text="Vandermonde", font=("Arial", 20))
+        label.grid()
+
+        x = tk.Label(root, text="Ingrese los valores de x separados por comas")
+        x.grid()
+        xEntry = tk.Entry(root)
+        xEntry.grid()
+
+        y = tk.Label(root, text="Ingrese los valores de y separados por comas")
+        y.grid()
+        yEntry = tk.Entry(root)
+        yEntry.grid()
+
+        puntos = tk.Label(
+            root, text="Ingrese los puntos a evaluar separados por comas")
+        puntos.grid()
+        puntosEntry = tk.Entry(root)
+        puntosEntry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: vandermonde(
+            xEntry.get(), yEntry.get(), str(puntosEntry.get()), root, atras))
+        calcular.grid()
 
     atras = tk.Button(root, text="Atras", command=lambda: inicio(root))
     atras.grid()
