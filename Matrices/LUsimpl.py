@@ -31,3 +31,4 @@ A = np.array([[1.043, -0.082, -0.088],
 b = np.array([1, 0, 0])
 
 print(LUsimpl(A, b))
+
