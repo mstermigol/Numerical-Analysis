@@ -2,6 +2,7 @@ import tkinter as tk
 from Raices.biseccion import biseccion
 from Raices.busquedas_incrementales import busquedas
 from Interpolacion.Lagrange import lagrange
+from Interpolacion.Newton import newtonInterpolacion
 from math import *
 
 root = tk.Tk()
@@ -28,8 +29,7 @@ opcionesMetodos = [
     "LU parcial",
     "LU simple",
     "LaGrange",
-    "Newton",
-    "Spline",
+    "Diferencias divididas",
     "Vandermonde"
 ]
 
@@ -186,8 +186,31 @@ def definirMetodo(root, metodo):
         calcular = tk.Button(root, text="Calcular", command=lambda: lagrange(
             xEntry.get(), yEntry.get(), float(puntoEntry.get()), root, atras))
         calcular.grid()
-    elif metodo == "Newton":
-        print("Newton")
+    elif metodo == "Diferencias divididas":
+        label = tk.Label(root, text="Diferencias divididas",
+                         font=("Arial", 20))
+        label.grid()
+
+        x = tk.Label(root, text="Ingrese los valores de x separados por comas")
+        x.grid()
+        xEntry = tk.Entry(root)
+        xEntry.grid()
+
+        y = tk.Label(root, text="Ingrese los valores de y separados por comas")
+        y.grid()
+        yEntry = tk.Entry(root)
+        yEntry.grid()
+
+        punto = tk.Label(
+            root, text="Ingrese los puntos a evaluar separados por comas")
+        punto.grid()
+        puntoEntry = tk.Entry(root)
+        puntoEntry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: newtonInterpolacion(
+            xEntry.get(), yEntry.get(), str(puntoEntry.get()), root, atras))
+        calcular.grid()
+
     elif metodo == "Spline":
         print("Spline")
     elif metodo == "Vandermonde":
