@@ -5,6 +5,7 @@ from Interpolacion.Lagrange import lagrange
 from Raices.newton import newton_lambda
 from Interpolacion.Newton import newtonInterpolacion
 from Interpolacion.Vandermonde import vandermonde
+from Matrices.gausspl import gausspl
 from math import *
 
 root = tk.Tk()
@@ -57,7 +58,7 @@ inicio(root)
 
 operaciones = {"exp": exp, "ln(x)": log, "log(x)": log10,
                "sin(x)": sin, "cos(x)": cos, "tan(x)": tan,
-               "sqrt(x)": sqrt, "thirdroot(x)": lambda x: x**(1/3)}
+               "sqrt(x)": sqrt, "thirdroot(x)": lambda x: x**(1/3),}
 
 error = ["Error absoluto", "Error relativo"]
 
@@ -185,6 +186,32 @@ def definirMetodo(root, metodo):
     elif metodo == "Doolittle":
         print("Doolittle")
     elif metodo == "Gauss simple":
+        label = tk.Label(root, text="Gauss simple", font=("Arial", 20))
+        label.grid()
+
+        a = tk.Label(root, text="Ingrese la fila a separada por comas")
+        a.grid()
+        aEntry = tk.Entry(root)
+        aEntry.grid()
+
+        b = tk.Label(root, text="Ingrese la fila b separada por comas")
+        b.grid()
+        bEntry = tk.Entry(root)
+        bEntry.grid()
+
+        c = tk.Label(root, text="Ingrese la fila c separada por comas")
+        c.grid()
+        cEntry = tk.Entry(root)
+        cEntry.grid()
+
+        d = tk.Label(root, text="Ingrese el vector d separad0 por comas")
+        d.grid()
+        dEntry = tk.Entry(root)
+        dEntry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: gausspl(
+            aEntry.get(), bEntry.get(), cEntry.get(), dEntry.get(), root, atras))
+        calcular.grid()
         print("Gauss simple")
     elif metodo == "Gauss con pivoteo parcial":
         print("Gauss con pivoteo parcial")
