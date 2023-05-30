@@ -1,6 +1,7 @@
 import tkinter as tk
 from Raices.biseccion import biseccion
 from Raices.busquedas_incrementales import busquedas
+from Interpolacion.Lagrange import lagrange
 from math import *
 
 root = tk.Tk()
@@ -53,7 +54,8 @@ def inicio(root):
 inicio(root)
 
 operaciones = {"exp": exp, "ln(x)": log, "log(x)": log10,
-               "sin(x)": sin, "cos(x)": cos, "tan(x)": tan}
+               "sin(x)": sin, "cos(x)": cos, "tan(x)": tan,
+               "sqrt(x)": sqrt, "thirdroot(x)": lambda x: x**(1/3)}
 
 error = ["Error absoluto", "Error relativo"]
 
@@ -163,7 +165,27 @@ def definirMetodo(root, metodo):
     elif metodo == "LU simple":
         print("LU simple")
     elif metodo == "LaGrange":
-        print("LaGrange")
+        label = tk.Label(root, text="LaGrange", font=("Arial", 20))
+        label.grid()
+
+        x = tk.Label(root, text="Ingrese los valores de x separados por comas")
+        x.grid()
+        xEntry = tk.Entry(root)
+        xEntry.grid()
+
+        y = tk.Label(root, text="Ingrese los valores de y separados por comas")
+        y.grid()
+        yEntry = tk.Entry(root)
+        yEntry.grid()
+
+        punto = tk.Label(root, text="Ingrese el valor del punto")
+        punto.grid()
+        puntoEntry = tk.Entry(root)
+        puntoEntry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: lagrange(
+            xEntry.get(), yEntry.get(), float(puntoEntry.get()), root, atras))
+        calcular.grid()
     elif metodo == "Newton":
         print("Newton")
     elif metodo == "Spline":
