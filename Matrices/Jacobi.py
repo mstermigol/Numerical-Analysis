@@ -24,7 +24,7 @@ def jacobi(A, b, x0, tol, Nmax):
     err = E
     return x, iter, err
 
-
+"""
 A = np.array([[4, -1, -2],
               [1, -8, 2],
              [-2, 1, 5]])
@@ -38,3 +38,4 @@ tol = 1e-2
 Nmax = 100
 
 print(jacobi(A, b, x0, tol, Nmax))
+"""

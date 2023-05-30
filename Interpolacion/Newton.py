@@ -1,7 +1,7 @@
 import sympy as sp
 import numpy as np
 from tkinter import *
-from PIL import ImageTk, Image
+#from PIL import ImageTk, Image
 
 
 def newtonInterpolacion(x, y, puntos, root, atras):
