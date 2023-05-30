@@ -6,6 +6,7 @@ from Raices.newton import newton_lambda
 from Interpolacion.Newton import newtonInterpolacion
 from Interpolacion.Vandermonde import vandermonde
 from Matrices.gausspl import gausspl
+from Matrices.gausspar import gausspar
 from Matrices.Jacobi import jacobi
 from Matrices.gseidel import gseidel
 from Matrices.LUpar import LUparcial
@@ -225,6 +226,41 @@ def definirMetodo(root, metodo):
         x_result = tk.Label(root, text="Valores de x:")
         x_result.grid()
     elif metodo == "Gauss con pivoteo parcial":
+        def calcularGaussParcial(A_str, b_str):
+            A_rows = A_str.split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+            b = np.array(list(map(float, b_str.split(','))))
+
+            # Llamar a la función de eliminación gaussiana con las entradas proporcionadas
+            x = gausspar(A, b)
+
+            # Mostrar los resultados en la interfaz de Tkinter
+            x_result.config(text="Valores de x: " + str(x))
+        
+        label = tk.Label(root, text="Eliminación Gaussiana con pivoteo parcial", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: calcularGaussParcial(
+            A_entry.get(), b_entry.get()))
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
+        
         print("Gauss con pivoteo parcial")
     elif metodo == "Gauss con pivoteo total":
         print("Gauss con pivoteo total")
