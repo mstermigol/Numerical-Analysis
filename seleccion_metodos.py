@@ -7,7 +7,7 @@ from Raices.newton import newton_lambda
 =======
 from Interpolacion.Newton import newtonInterpolacion
 from Interpolacion.Vandermonde import vandermonde
->>>>>>> c1a95791265e41ddbaa0aa313e05e05ac5d56237
+>>>>>>>
 from math import *
 
 root = tk.Tk()
