@@ -49,15 +49,16 @@ def gseidel(A, b, x0, tol, Nmax):
     return x, iter, err
 
 
-A = np.array([[1.043, -0.082, -0.088],
-              [-0.011, 0.527, -0.104],
-              [-0.137, -0.077, 0.362]])
 
-b = np.array([1, 0, 0])
+A = np.array([[4, -1, -2],
+              [1, -8, 2],
+             [-2, 1, 5]])
 
-x0 = np.array([0, 0, 0])
+b = np.array([8, -11, 1])
 
-tol = 1e-5
+x0 = np.array([2, 2, 2])
+
+tol = 0.05
 
 Nmax = 100
 

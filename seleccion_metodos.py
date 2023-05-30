@@ -227,6 +227,64 @@ def definirMetodo(root, metodo):
     elif metodo == "Gauss con pivoteo total":
         print("Gauss con pivoteo total")
     elif metodo == "Gauss-Seidel":
+        def calculargseidel(A_str, b_str, X0_str, tol_str, Nmax_str):
+            A_rows = A_str.split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+            b = np.array(list(map(float, b_str.split(','))))
+            X0 = np.array(list(map(float, X0_str.split(','))))
+            tol = float(tol_str)
+            Nmax = int(Nmax_str)
+
+            result = jacobi(A, b, X0, tol, Nmax)
+
+            x_result.config(text="Valores de x: " + str(result[0]))
+            iter_result.config(text="Número de iteraciones: " + str(result[1]))
+            error_result.config(text="Error: " + str(result[2]))
+
+        label = tk.Label(root, text="Gauss-Seidel", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        X0_label = tk.Label(root, text="Ingrese la aproximación inicial X0 (separado por comas):")
+        X0_label.grid()
+        X0_entry = tk.Entry(root)
+        X0_entry.grid()
+
+        tol_label = tk.Label(root, text="Ingrese la tolerancia:")
+        tol_label.grid()
+        tol_entry = tk.Entry(root)
+        tol_entry.grid()
+
+        Nmax_label = tk.Label(root, text="Ingrese el número máximo de iteraciones (Nmax):")
+        Nmax_label.grid()
+        Nmax_entry = tk.Entry(root)
+        Nmax_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: calculargseidel(
+            A_entry.get(), b_entry.get(), X0_entry.get(), tol_entry.get(), Nmax_entry.get()))
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
+
+        iter_result = tk.Label(root, text="Número de iteraciones:")
+        iter_result.grid()
+
+        error_result = tk.Label(root, text="Error:")
+        error_result.grid()
         print("Gauss-Seidel")
     elif metodo == "Jacobi":
         def calcularJacobi(A_str, b_str, X0_str, tol_str, Nmax_str):
