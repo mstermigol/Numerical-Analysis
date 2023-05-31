@@ -33,7 +33,7 @@ b = np.array([8, -11, 1])
 
 x0 = np.array([2, 2, 2])
 
-tol = 1e-2
+tol = 0.05
 
 Nmax = 100
 

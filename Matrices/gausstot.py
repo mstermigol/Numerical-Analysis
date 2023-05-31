@@ -1,5 +1,5 @@
 import numpy as np
-from sustregr import sustregrM
+from Matrices.sustregr import sustregrM
 
 
 def gausstot(A, b):
@@ -27,7 +27,7 @@ def gausstot(A, b):
         x[cambi[i][1]] = aux
     return x
 
-
+"""
 A = np.array([[1.043, -0.082, -0.088],
               [-0.011, 0.527, -0.104],
               [-0.137, -0.077, 0.362]])
@@ -35,3 +35,4 @@ A = np.array([[1.043, -0.082, -0.088],
 b = np.array([1, 0, 0])
 
 print(gausstot(A, b))
+"""

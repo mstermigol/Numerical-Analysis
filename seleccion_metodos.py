@@ -1,4 +1,5 @@
 import tkinter as tk
+from Matrices.Cholesky import cholesky
 from Raices.biseccion import biseccion
 from Raices.busquedas_incrementales import busquedas
 from Interpolacion.Lagrange import lagrange
@@ -6,7 +7,14 @@ from Raices.newton import newton_lambda
 from Interpolacion.Newton import newtonInterpolacion
 from Interpolacion.Vandermonde import vandermonde
 from Matrices.gausspl import gausspl
+from Matrices.gausspar import gausspar
 from Matrices.Jacobi import jacobi
+from Matrices.gseidel import gseidel
+from Matrices.LUpar import LUparcial
+from Matrices.Crout import crout
+from Matrices.Doolitle import doolitle_solucion
+from Matrices.LUsimpl import LUsimpl
+from Matrices.gausstot import gausstot
 import numpy as np
 from math import *
 
@@ -60,7 +68,7 @@ inicio(root)
 
 operaciones = {"exp": exp, "ln(x)": log, "log(x)": log10,
                "sin(x)": sin, "cos(x)": cos, "tan(x)": tan,
-               "sqrt(x)": sqrt, "thirdroot(x)": lambda x: x**(1/3),}
+               "sqrt(x)": sqrt, "thirdroot(x)": lambda x: x**(1/3), }
 
 error = ["Error absoluto", "Error relativo"]
 
@@ -111,6 +119,13 @@ def definirMetodo(root, metodo):
         calcular.grid()
 
     elif metodo == "Busqueda incremental":
+        def calcularBusquedaIncremental():
+            busqueda = busquedas(
+                funcionEntry.get(), float(x0Entry.get()), float(hEntry.get()), int(NmaxEntry.get()), root, operaciones, atras)
+
+            x_result.config(text="Intervalo: " + "[" + str(busqueda[0]) + " " + str(
+                busqueda[1]) + "]" + " " + "y paso: " + str(busqueda[2]))
+
         label = tk.Label(root, text="Busqueda incremental", font=("Arial", 20))
         label.grid()
 
@@ -134,11 +149,16 @@ def definirMetodo(root, metodo):
         NmaxEntry = tk.Entry(root)
         NmaxEntry.grid()
 
-        calcular = tk.Button(root, text="Calcular", command=lambda: busquedas(
-            funcionEntry.get(), float(x0Entry.get()), float(hEntry.get()), int(NmaxEntry.get()), root, operaciones, atras))
+        calcular = tk.Button(root, text="Calcular",
+                             command=calcularBusquedaIncremental)
         calcular.grid()
 
-        print("Busqueda incremental")
+        result_label = tk.Label(root, text="Resultados: ")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Intervalo y paso:")
+        x_result.grid()
+
     elif metodo == "Newton":
         label = tk.Label(root, text="Newton", font=("Arial", 20))
         label.grid()
@@ -172,7 +192,6 @@ def definirMetodo(root, metodo):
             fEntry.get(), derivadaEntry.get(), float(x0Entry.get()), float(tolEntry.get()), int(NmaxEntry.get()), root, operaciones, atras))
         calcular.grid()
 
-        print("Newton")
     elif metodo == "Punto fijo":
         print("Punto fijo")
     elif metodo == "Raices multiples":
@@ -182,45 +201,284 @@ def definirMetodo(root, metodo):
     elif metodo == "Regla falsa":
         print("Regla falsa")
     elif metodo == "Cholesky":
-        print("Cholesky")
-    elif metodo == "Crout":
-        print("Crout")
-    elif metodo == "Doolittle":
-        print("Doolittle")
-    elif metodo == "Gauss simple":
-        label = tk.Label(root, text="Gauss simple", font=("Arial", 20))
+        def calcularCholesky():
+            A_rows = A_entry.get().split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+
+            b = np.array(list(map(float, b_entry.get().split(','))))
+
+            x = cholesky(A, b)
+
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(root, text="Cholesky", font=("Arial", 20))
         label.grid()
 
-        a = tk.Label(root, text="Ingrese la fila a separada por comas")
-        a.grid()
-        aEntry = tk.Entry(root)
-        aEntry.grid()
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
 
-        b = tk.Label(root, text="Ingrese la fila b separada por comas")
-        b.grid()
-        bEntry = tk.Entry(root)
-        bEntry.grid()
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
 
-        c = tk.Label(root, text="Ingrese la fila c separada por comas")
-        c.grid()
-        cEntry = tk.Entry(root)
-        cEntry.grid()
-
-        d = tk.Label(root, text="Ingrese el vector d separad0 por comas")
-        d.grid()
-        dEntry = tk.Entry(root)
-        dEntry.grid()
-
-        calcular = tk.Button(root, text="Calcular", command=lambda: gausspl(
-            aEntry.get(), bEntry.get(), cEntry.get(), dEntry.get(), root, atras))
+        calcular = tk.Button(root, text="Calcular", command=calcularCholesky)
         calcular.grid()
-        print("Gauss simple")
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
+
+    elif metodo == "Crout":
+        def calcularCrout():
+            A_rows = A_entry.get().split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+
+            b = np.array(list(map(float, b_entry.get().split(','))))
+
+            x = crout(A, b)
+
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(root, text="Crout", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=calcularCrout)
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
+    elif metodo == "Doolittle":
+        def calcularDoolitle():
+            A_rows = A_entry.get().split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+
+            b = np.array(list(map(float, b_entry.get().split(','))))
+
+            x = doolitle_solucion(A, b)
+
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(root, text="Doolittle", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=calcularDoolitle)
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
+
+    elif metodo == "Gauss simple":
+        def calcularGauss(A_str, b_str):
+            A_rows = A_str.split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+            b = np.array(list(map(float, b_str.split(','))))
+
+            x = gausspl(A, b)
+
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(root, text="Eliminación Gaussiana",
+                         font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: calcularGauss(
+            A_entry.get(), b_entry.get()))
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
     elif metodo == "Gauss con pivoteo parcial":
-        print("Gauss con pivoteo parcial")
+        def calcularGaussParcial(A_str, b_str):
+            A_rows = A_str.split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+            b = np.array(list(map(float, b_str.split(','))))
+
+            x = gausspar(A, b)
+
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(
+            root, text="Eliminación Gaussiana con pivoteo parcial", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: calcularGaussParcial(
+            A_entry.get(), b_entry.get()))
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
     elif metodo == "Gauss con pivoteo total":
-        print("Gauss con pivoteo total")
+        def calcularGaussTotal(A_str, b_str):
+            A_rows = A_str.split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+            b = np.array(list(map(float, b_str.split(','))))
+
+            x = gausstot(A, b)
+
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(
+            root, text="Eliminación Gaussiana con pivoteo parcial", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: calcularGaussTotal(
+            A_entry.get(), b_entry.get()))
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
     elif metodo == "Gauss-Seidel":
-        print("Gauss-Seidel")
+        def calculargseidel(A_str, b_str, X0_str, tol_str, Nmax_str):
+            A_rows = A_str.split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+            b = np.array(list(map(float, b_str.split(','))))
+            X0 = np.array(list(map(float, X0_str.split(','))))
+            tol = float(tol_str)
+            Nmax = int(Nmax_str)
+
+            result = gseidel(A, b, X0, tol, Nmax)
+
+            x_result.config(text="Valores de x: " + str(result[0]))
+            iter_result.config(
+                text="Número de iteraciones: " + str(result[1]))
+            error_result.config(text="Error: " + str(result[2]))
+
+        label = tk.Label(root, text="Gauss-Seidel", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        X0_label = tk.Label(
+            root, text="Ingrese la aproximación inicial X0 (separado por comas):")
+        X0_label.grid()
+        X0_entry = tk.Entry(root)
+        X0_entry.grid()
+
+        tol_label = tk.Label(root, text="Ingrese la tolerancia:")
+        tol_label.grid()
+        tol_entry = tk.Entry(root)
+        tol_entry.grid()
+
+        Nmax_label = tk.Label(
+            root, text="Ingrese el número máximo de iteraciones (Nmax):")
+        Nmax_label.grid()
+        Nmax_entry = tk.Entry(root)
+        Nmax_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: calculargseidel(
+            A_entry.get(), b_entry.get(), X0_entry.get(), tol_entry.get(), Nmax_entry.get()))
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
+
+        iter_result = tk.Label(root, text="Número de iteraciones:")
+        iter_result.grid()
+
+        error_result = tk.Label(root, text="Error:")
+        error_result.grid()
     elif metodo == "Jacobi":
         def calcularJacobi(A_str, b_str, X0_str, tol_str, Nmax_str):
             A_rows = A_str.split(';')
@@ -234,23 +492,27 @@ def definirMetodo(root, metodo):
             result = jacobi(A, b, X0, tol, Nmax)
 
             x_result.config(text="Valores de x: " + str(result[0]))
-            iter_result.config(text="Número de iteraciones: " + str(result[1]))
+            iter_result.config(
+                text="Número de iteraciones: " + str(result[1]))
             error_result.config(text="Error: " + str(result[2]))
 
         label = tk.Label(root, text="Jacobi", font=("Arial", 20))
         label.grid()
 
-        A_label = tk.Label(root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
         A_label.grid()
         A_entry = tk.Entry(root)
         A_entry.grid()
 
-        b_label = tk.Label(root, text="Ingrese el vector b (separado por comas):")
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
         b_label.grid()
         b_entry = tk.Entry(root)
         b_entry.grid()
 
-        X0_label = tk.Label(root, text="Ingrese la aproximación inicial X0 (separado por comas):")
+        X0_label = tk.Label(
+            root, text="Ingrese la aproximación inicial X0 (separado por comas):")
         X0_label.grid()
         X0_entry = tk.Entry(root)
         X0_entry.grid()
@@ -260,7 +522,8 @@ def definirMetodo(root, metodo):
         tol_entry = tk.Entry(root)
         tol_entry.grid()
 
-        Nmax_label = tk.Label(root, text="Ingrese el número máximo de iteraciones (Nmax):")
+        Nmax_label = tk.Label(
+            root, text="Ingrese el número máximo de iteraciones (Nmax):")
         Nmax_label.grid()
         Nmax_entry = tk.Entry(root)
         Nmax_entry.grid()
@@ -281,9 +544,76 @@ def definirMetodo(root, metodo):
         error_result = tk.Label(root, text="Error:")
         error_result.grid()
     elif metodo == "LU parcial":
-        print("LU parcial")
+        def calcularLuPar(A_str, b_str):
+            A_rows = A_str.split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+            b = np.array(list(map(float, b_str.split(','))))
+
+            x = LUparcial(A, b)
+
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(root, text="LU parcial", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: calcularLuPar(
+            A_entry.get(), b_entry.get()))
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
     elif metodo == "LU simple":
-        print("LU simple")
+        def calcularLuSimple(A_str, b_str):
+            A_rows = A_str.split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+            b = np.array(list(map(float, b_str.split(','))))
+
+            x = LUsimpl(A, b)
+
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(root, text="LU Simple", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: calcularLuSimple(
+            A_entry.get(), b_entry.get()))
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
+
     elif metodo == "LaGrange":
         label = tk.Label(root, text="LaGrange", font=("Arial", 20))
         label.grid()

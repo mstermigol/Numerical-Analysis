@@ -1,6 +1,6 @@
 import numpy as np
-from sustregr import sustregr
-from sustprgr import sustprgr
+from Matrices.sustregr import sustregr
+from Matrices.sustprgr import sustprgr
 
 
 def doolitle_matrices(A):
@@ -37,19 +37,6 @@ def doolitle_solucion(A, b):
     U[n-1, n-1] = A[n-1, n-1] - np.dot(L[n-1, 0:n-1], U[0:n-1, n-1])
 
     z = sustprgr(L, b)
-    print(z)
     x = sustregr(U, z)
 
     return x
-
-
-A = np.array([[-3, -2, -1],
-              [3, 4, 4],
-              [- 3, -4, -6]])
-
-b = np.array([-6, 11, -13])
-
-
-# print(np.linalg.inv(A))
-
-print(doolitle_solucion(A, b))

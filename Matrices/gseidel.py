@@ -1,33 +1,4 @@
-"""function [x,iter,err]=C17_gseidel(A,b,x0,tol,Nmax)
-
-%Inicializaci�n 
-D=diag(diag(A));
-L=-tril(A)+D;
-U=-triu(A)+D;
-T=inv(D-L)*U; 
-C=inv(D-L)*b;
-xant=x0;
-E=1000;
-cont=0;
-
-%Ciclo
-while E>tol && cont<Nmax       
-    xact=T*xant+C;
-    E=norm(xant-xact);
-    xant=xact;
-    cont=cont+1;
-end
-
-%Entrega de resultados
-x=xact;
-iter=cont;
-err=E;
-end"""
-
 import numpy as np
-from sustregr import sustregr
-from sustprgr import sustprgr
-
 
 def gseidel(A, b, x0, tol, Nmax):
     D = np.diag(np.diag(A))
@@ -49,16 +20,18 @@ def gseidel(A, b, x0, tol, Nmax):
     return x, iter, err
 
 
-A = np.array([[1.043, -0.082, -0.088],
-              [-0.011, 0.527, -0.104],
-              [-0.137, -0.077, 0.362]])
+"""
+A = np.array([[4, -1, -2],
+              [1, -8, 2],
+             [-2, 1, 5]])
 
-b = np.array([1, 0, 0])
+b = np.array([8, -11, 1])
 
-x0 = np.array([0, 0, 0])
+x0 = np.array([2, 2, 2])
 
-tol = 1e-5
+tol = 0.05
 
 Nmax = 100
 
 print(gseidel(A, b, x0, tol, Nmax))
+"""

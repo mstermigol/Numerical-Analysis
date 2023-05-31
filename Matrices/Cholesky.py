@@ -1,6 +1,6 @@
 import numpy as np
-from sustregr import sustregr
-from sustprgr import sustprgr
+from Matrices.sustregr import sustregr
+from Matrices.sustprgr import sustprgr
 
 
 def cholesky(A, b):
@@ -22,12 +22,3 @@ def cholesky(A, b):
     x = sustregr(U, z)
 
     return x
-
-
-A = np.array([[1.043, -0.082, -0.088],
-              [-0.011, 0.527, -0.104],
-              [-0.137, -0.077, 0.362]])
-
-b = np.array([1, 0, 0])
-
-print(cholesky(A, b))

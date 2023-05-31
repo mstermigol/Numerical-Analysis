@@ -1,6 +1,6 @@
 import numpy as np
-from sustregr import sustregr
-from sustprgr import sustprgr
+from Matrices.sustprgr import sustprgr
+from Matrices.sustregr import sustregr
 
 
 def LUparcial(A, b):
@@ -35,22 +35,23 @@ def LUparcial(A, b):
     z = sustprgr(L, np.dot(P, b))
     x = sustregr(U, z)
 
-    print("L: ")
-    print(L)
-    print("\nU: ")
-    print(U)
-    print("\nP: ")
-    print(P)
+    #print("L: ")
+    #print(L)
+    #print("\nU: ")
+    #print(U)
+    #print("\nP: ")
+    #print(P)
 
-    print("\nValores de x: ")
+    #print("\nValores de x: ")
     return x
 
-
-A = np.array([[1.043, -0.082, -0.088],
-              [-0.011, 0.527, -0.104],
-              [-0.137, -0.077, 0.362]])
+"""
+A = np.array([[4, -1, -2],
+              [1, -8, 2],
+             [-2, 1, 5]])
 
 b = np.array([1, 0, 0])
 
 
 print(LUparcial(A, b))
+"""
