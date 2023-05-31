@@ -19,22 +19,6 @@ def busquedas(f, x0, h, Nmax, root, operaciones, atras):
         fActual = eval(f, operaciones, {'x': xActual})
         cont += 1
 
-    lista = [[xAnterior, xActual, h]]
+    lista = [xAnterior, xActual, h]
 
-    for widget in root.winfo_children():
-        if widget != atras:
-            widget.destroy()
-
-    e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
-    e.grid(row=0, column=0)
-    e.insert(END, "a")
-
-    e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
-    e.grid(row=0, column=1)
-    e.insert(END, "b")
-
-    e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
-    e.grid(row=0, column=2)
-    e.insert(END, "h")
-
-    t = tabla(lista, root, atras)
+    return lista

@@ -117,6 +117,13 @@ def definirMetodo(root, metodo):
         calcular.grid()
 
     elif metodo == "Busqueda incremental":
+        def calcularBusquedaIncremental():
+            busqueda = busquedas(
+                funcionEntry.get(), float(x0Entry.get()), float(hEntry.get()), int(NmaxEntry.get()), root, operaciones, atras)
+
+            x_result.config(text="Intervalo: " + "[" + str(busqueda[0]) + " " + str(
+                busqueda[1]) + "]" + " " + "y paso: " + str(busqueda[2]))
+
         label = tk.Label(root, text="Busqueda incremental", font=("Arial", 20))
         label.grid()
 
@@ -140,11 +147,16 @@ def definirMetodo(root, metodo):
         NmaxEntry = tk.Entry(root)
         NmaxEntry.grid()
 
-        calcular = tk.Button(root, text="Calcular", command=lambda: busquedas(
-            funcionEntry.get(), float(x0Entry.get()), float(hEntry.get()), int(NmaxEntry.get()), root, operaciones, atras))
+        calcular = tk.Button(root, text="Calcular",
+                             command=calcularBusquedaIncremental)
         calcular.grid()
 
-        print("Busqueda incremental")
+        result_label = tk.Label(root, text="Resultados: ")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Intervalo y paso:")
+        x_result.grid()
+
     elif metodo == "Newton":
         label = tk.Label(root, text="Newton", font=("Arial", 20))
         label.grid()
@@ -178,7 +190,6 @@ def definirMetodo(root, metodo):
             fEntry.get(), derivadaEntry.get(), float(x0Entry.get()), float(tolEntry.get()), int(NmaxEntry.get()), root, operaciones, atras))
         calcular.grid()
 
-        print("Newton")
     elif metodo == "Punto fijo":
         print("Punto fijo")
     elif metodo == "Raices multiples":
@@ -370,8 +381,6 @@ def definirMetodo(root, metodo):
 
         x_result = tk.Label(root, text="Valores de x:")
         x_result.grid()
-
-        print("Gauss con pivoteo parcial")
     elif metodo == "Gauss con pivoteo total":
         print("Gauss con pivoteo total")
     elif metodo == "Gauss-Seidel":
@@ -438,7 +447,6 @@ def definirMetodo(root, metodo):
 
         error_result = tk.Label(root, text="Error:")
         error_result.grid()
-        print("Gauss-Seidel")
     elif metodo == "Jacobi":
         def calcularJacobi(A_str, b_str, X0_str, tol_str, Nmax_str):
             A_rows = A_str.split(';')
@@ -540,7 +548,6 @@ def definirMetodo(root, metodo):
 
         x_result = tk.Label(root, text="Valores de x:")
         x_result.grid()
-        print("LU parcial")
     elif metodo == "LU simple":
         print("LU simple")
     elif metodo == "LaGrange":
