@@ -48,7 +48,6 @@
 
 ### Anotaciones generales
 
-[Seudocódigo]()
 Cuando se escriba una función, los equivalentes a estas expresiones son los siguientes:
 
 - $e^x=exp⁡(x)$
