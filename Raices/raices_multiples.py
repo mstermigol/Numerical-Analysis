@@ -69,7 +69,7 @@ def raices_multiples_relativo(f, primeraDerivada, segundaDerivada, xo, tol, Nmax
         cont += 1
         xAnterior = xActual
         fAnterior = fActual
-        resultados.append([cont, xAnterior, fAnterior, E])
+        resultados.append([cont, xAnterior, fAnterior, e])
 
     for widget in root.winfo_children():
         if widget != atras:
