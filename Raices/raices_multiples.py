@@ -8,7 +8,7 @@ def raices_multiples(f, primeraDerivada, segundaDerivada, xo, tol, Nmax,  root, 
     else:
         raices_multiples_relativo(f, primeraDerivada, segundaDerivada, xo, tol, Nmax,  root, operaciones, atras)
  
- def raices_multiples_absoluto(f, primeraDerivada, segundaDerivada, xo, tol, Nmax,  root, operaciones, atras):
+def raices_multiples_absoluto(f, primeraDerivada, segundaDerivada, xo, tol, Nmax,  root, operaciones, atras):
     resultados = []
     xAnterior = xo
     fAnterior = eval(f, operaciones, {'x': xAnterior})
