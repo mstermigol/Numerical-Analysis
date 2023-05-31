@@ -20,7 +20,7 @@ def gseidel(A, b, x0, tol, Nmax):
     return x, iter, err
 
 
-
+"""
 A = np.array([[4, -1, -2],
               [1, -8, 2],
              [-2, 1, 5]])
@@ -34,3 +34,4 @@ tol = 0.05
 Nmax = 100
 
 print(gseidel(A, b, x0, tol, Nmax))
+"""
