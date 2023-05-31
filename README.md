@@ -63,6 +63,8 @@ Si se van a usar decimales se manejan con el “.” (punto) así _1.5_
 
 En las matrices la manera de ingresar la matriz A es, cada elemento de la fila separado por “,” y cuando se va a pasar a la siguiente fila se pone un “;”. Ejemplo: _2,3;1,2_ (Lo que resulta en una matriz 2X2 donde 2 y 3 son los valores de la fila uno de izquierda a derecha y, 1 y 2 son los elementos de la segunda fila).
 
+Para los métodos donde se necesite un numero maximo de iteraciones, este debe ser un numero entero
+
 Los métodos se distribuyeron de la siguiente manera:
 
 **Miguel Sosa**
@@ -129,13 +131,19 @@ Los métodos se distribuyeron de la siguiente manera:
 
 [Seudocódigo](#seudocódigo-cholesky)
 
+El metodo, a pesar de que trabaja con numeros imaginarios, no se programó para trabajar así, por ende no se aceptan valores negativos en la raiz. Además se tiene que ingresar matrices simetricas, que la matriz sea no singular y que la matriz esté bien condicionada
+
 ### Anotaciones Crout
 
 [Seudocódigo](#seudocódigo-crout)
 
+Se tiene que ingresar matrices simetricas, que la matriz sea no singular y que la matriz esté bien condicionada
+
 ### Anotaciones Doolittle
 
 [Seudocódigo](#seudocódigo-doolittle)
+
+Se tiene que ingresar matrices simetricas, que la matriz sea no singular y que la matriz esté bien condicionada
 
 ### Anotaciones Gauss simple
 
@@ -561,7 +569,6 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
         iter = cont
         err = E
         retornar x, iter, err
-
 
 ### Seudocódigo LU parcial
 
