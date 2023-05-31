@@ -222,7 +222,40 @@ def definirMetodo(root, metodo):
         x_result.grid()
 
     elif metodo == "Crout":
-        print("Crout")
+        def calcularCrout():
+            A_rows = A_entry.get().split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+
+            b = np.array(list(map(float, b_entry.get().split(','))))
+
+            x = cholesky(A, b)
+
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(root, text="Crout", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=calcularCrout)
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
     elif metodo == "Doolittle":
         print("Doolittle")
     elif metodo == "Gauss simple":
