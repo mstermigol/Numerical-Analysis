@@ -1,5 +1,6 @@
 - [Manual de usuario](#manual-de-usuario)
   - [Anotaciones generales](#anotaciones-generales)
+  - [Anotaciones bisección](#anotaciones-bisección)
   - [Anotaciones busquedas incrementales](#anotaciones-busquedas-incrementales)
   - [Anotaciones Newton](#anotaciones-newton)
   - [Anotaciones punto fijo](#anotaciones-punto-fijo)
@@ -47,6 +48,7 @@
 
 ### Anotaciones generales
 
+[Seudocódigo]()
 Cuando se escriba una función, los equivalentes a estas expresiones son los siguientes:
 
 - $e^x=exp⁡(x)$
@@ -96,46 +98,84 @@ Los métodos se distribuyeron de la siguiente manera:
 - Regla falsa
 - Secante
 
+### Anotaciones bisección
+
+[Seudocódigo](#seudocódigo-bisección)
+
 ### Anotaciones busquedas incrementales
+
+[Seudocódigo](#seudocódigo-busquedas-incrementales)
 
 ### Anotaciones Newton
 
+[Seudocódigo](#seudocódigo-newton)
+
 ### Anotaciones punto fijo
+
+[Seudocódigo](#seudocódigo-punto-fijo)
 
 ### Anotaciones raices multiples
 
+[Seudocódigo](#seudocódigo-raíces-múltiples)
+
 ### Anotaciones secante
+
+[Seudocódigo](#seudocódigo-secante)
 
 ### Anotaciones regla falsa
 
+[Seudocódigo](#seudocódigo-regla-falsa)
+
 ### Anotaciones Cholesky
+
+[Seudocódigo](#seudocódigo-cholesky)
 
 ### Anotaciones Crout
 
+[Seudocódigo](#seudocódigo-crout)
+
 ### Anotaciones Doolittle
+
+[Seudocódigo](#seudocódigo-doolittle)
 
 ### Anotaciones Gauss simple
 
+[Seudocódigo](#seudocódigo-gauss-simple)
+
 ### Anotaciones Gauss parcial
+
+[Seudocódigo](#seudocódigo-gauss-parcial)
 
 ### Anotaciones Gauss total
 
+[Seudocódigo](#seudocódigo-gauss-total)
+
 ### Anotaciones Gauss-Seidel
+
+[Seudocódigo](#anotaciones-gauss-seidel)
 
 ### Anotaciones Jacobi
 
+[Seudocódigo](#seudocódigo-jacobi)
+
 ### Anotaciones LU parcial
+
+[Seudocódigo](#seudocódigo-lu-parcial)
 
 ### Anotaciones LU simple
 
+[Seudocódigo](#seudocódigo-lu-simple)
+
 ### Anotaciones Lagrange
 
+[Seudocódigo](#seudocódigo-lagrange)
 A la hora de ingresar los valores, estos se tienen que ingresar separados por “,” (coma) así _1,2,3,4_ además que todos los valores deben ser enteros o flotantes (nada de caracteres)
 
 Si se quiere extrapolar posiblemente dará un valor muy alejado del real, así que se debe evitar extrapolar con este método
 
 ### Anotaciones diferencias divididas
 
+[Seudocódigo](#seudocódigo-diferencias-divididas)
 A la hora de ingresar los valores, estos se tienen que ingresar separados por “,” (coma) así _1, 2, 3, 4_ además que todos los valores deben ser enteros o flotantes (nada de caracteres)
 
 Al ingresar los puntos, A la hora de ingresar los valores, estos se tienen que ingresar separados por “,” (coma) así _1, 2.5, 3, 4.5_
@@ -144,11 +184,14 @@ Si se quiere extrapolar posiblemente dará un valor muy alejado del real, así q
 
 ### Anotaciones Vandermonde
 
+[Seudocódigo](#seudocódigo-vandermonde)
 Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
 
 ## Seudocódigos
 
 ### Seudocódigo bisección
+
+[Anotaciones](#anotaciones-bisección)
 
 #### Relativo
 
@@ -210,6 +253,8 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
 
 ### Seudocódigo busquedas incrementales
 
+[Anotaciones](#anotaciones-busquedas-incrementales)
+
     Inicio
     funcion busquedas(f, x0, h, Nmax)
         xAnterior = x0
@@ -233,6 +278,8 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
 
 ### Seudocódigo Newton
 
+[Anotaciones](#anotaciones-newton)
+
     Inicio
     funcion newton(f, derivada, xo, tol, Nmax)
         xAnterior = xo
@@ -255,13 +302,23 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
 
 ### Seudocódigo punto fijo
 
+[Anotaciones](#anotaciones-punto-fijo)
+
 ### Seudocódigo raíces múltiples
+
+[Anotaciones](#anotaciones-raices-multiples)
 
 ### Seudocódigo secante
 
+[Anotaciones](#anotaciones-secante)
+
 ### Seudocódigo regla falsa
 
+[Anotaciones](#anotaciones-regla-falsa)
+
 ### Seudocódigo Cholesky
+
+[Anotaciones](#anotaciones-cholesky)
 
     Entradas A, b
     Salidas x []
@@ -294,6 +351,8 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
 
 ### Seudocódigo Crout
 
+[Anotaciones](#anotaciones-crout)
+
     Entradas: A, b
     Salidas: x[]
 
@@ -320,6 +379,8 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
         return x
 
 ### Seudocódigo Doolittle
+
+[Anotaciones](#anotaciones-doolittle)
 
     Entradas: A, b
     Salidas: x[]
@@ -348,6 +409,8 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
 
 ### Seudocódigo Gauss simple
 
+[Anotaciones](#anotaciones-gauss-simple)
+
     Inicio
     funcion gausspl(A, b)
         n = np.size(A, 0)
@@ -371,6 +434,8 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
     Fin
 
 ### Seudocódigo Gauss parcial
+
+[Anotaciones](#anotaciones-gauss-parcial)
 
     Inicio
     funcion gausspar(A, b):
@@ -409,15 +474,27 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
 
 ### Seudocódigo Gauss total
 
+[Anotaciones](#anotaciones-gauss-total)
+
 ### Seudocódigo Gauss-Seidel
+
+[Anotaciones](#anotaciones-gauss-seidel)
 
 ### Seudocódigo Jacobi
 
+[Anotaciones](#anotaciones-jacobi)
+
 ### Seudocódigo LU parcial
+
+[Anotaciones](#anotaciones-lu-parcial)
 
 ### Seudocódigo LU simple
 
+[Anotaciones](#anotaciones-lu-simple)
+
 ### Seudocódigo Lagrange
+
+[Anotaciones](#anotaciones-lagrange)
 
     Entradas x, y, punto
     Salidas p
@@ -438,6 +515,8 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
         return p
 
 ### Seudocódigo diferencias divididas
+
+[Anotaciones](#anotaciones-diferencias-divididas)
 
     Entradas: x, y, puntos
     Salidas: Polinomio, p(puntos)
@@ -489,6 +568,8 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
         finpara
 
 ### Seudocódigo Vandermonde
+
+[Anotaciones](#anotaciones-vandermonde)
 
     Entradas: x, y, puntos
     Salidas: coeficientes, valores
