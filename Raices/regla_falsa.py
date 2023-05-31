@@ -9,7 +9,7 @@ def regla_falsa(f, a, b, tol, Nmax, root, operaciones, error, atras):
     else:
         regla_falsa_relativo(f, a, b, tol, Nmax, root, operaciones, atras)
     
-def regla_falsa_absoluto(f, x0, x1, tol, Nmax, root, operaciones, atras):
+def regla_falsa_absoluto(f, a, b, tol, Nmax, root, operaciones, atras):
     resultados = []
     fa = eval(f, operaciones, {'x': a})
     fb = eval(f, operaciones, {'x': b})
@@ -71,7 +71,7 @@ def regla_falsa_absoluto(f, x0, x1, tol, Nmax, root, operaciones, atras):
 
     t = tabla(resultados, root, atras)
 
-def regla_falsa_relativo(f, x0, x1, tol, Nmax, root, operaciones, atras):
+def regla_falsa_relativo(f, a, b, tol, Nmax, root, operaciones, atras):
     resultados = []
     fa = eval(f, operaciones, {'x': a})
     fb = eval(f, operaciones, {'x': b})
