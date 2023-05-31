@@ -19,7 +19,7 @@ def newton_lambda(f, derivada, xo, tol, Nmax, root, operaciones, atras):
         fAnterior = fActual
         derivadaAnterior = eval(derivada, operaciones, {'x': xAnterior})   
 
-    resultados.append([cont, xAnterior, fAnterior, E])
+        resultados.append([cont, xAnterior, fAnterior, E])
 
     for widget in root.winfo_children():
         if widget != atras:
