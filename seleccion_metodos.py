@@ -13,6 +13,7 @@ from Matrices.gseidel import gseidel
 from Matrices.LUpar import LUparcial
 from Matrices.Crout import crout
 from Matrices.Doolitle import doolitle_solucion
+from Matrices.LUsimpl import LUsimpl
 import numpy as np
 from math import *
 
@@ -549,7 +550,41 @@ def definirMetodo(root, metodo):
         x_result = tk.Label(root, text="Valores de x:")
         x_result.grid()
     elif metodo == "LU simple":
-        print("LU simple")
+        def calcularLuSimple(A_str, b_str):
+            A_rows = A_str.split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+            b = np.array(list(map(float, b_str.split(','))))
+
+            x = LUsimpl(A, b)
+
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(root, text="LU Simple", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: calcularLuSimple(
+            A_entry.get(), b_entry.get()))
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
+
     elif metodo == "LaGrange":
         label = tk.Label(root, text="LaGrange", font=("Arial", 20))
         label.grid()
