@@ -119,6 +119,13 @@ def definirMetodo(root, metodo):
         calcular.grid()
 
     elif metodo == "Busqueda incremental":
+        def calcularBusquedaIncremental():
+            busqueda = busquedas(
+                funcionEntry.get(), float(x0Entry.get()), float(hEntry.get()), int(NmaxEntry.get()), root, operaciones, atras)
+
+            x_result.config(text="Intervalo: " + "[" + str(busqueda[0]) + " " + str(
+                busqueda[1]) + "]" + " " + "y paso: " + str(busqueda[2]))
+
         label = tk.Label(root, text="Busqueda incremental", font=("Arial", 20))
         label.grid()
 
@@ -142,9 +149,16 @@ def definirMetodo(root, metodo):
         NmaxEntry = tk.Entry(root)
         NmaxEntry.grid()
 
-        calcular = tk.Button(root, text="Calcular", command=lambda: busquedas(
-            funcionEntry.get(), float(x0Entry.get()), float(hEntry.get()), int(NmaxEntry.get()), root, operaciones, atras))
+        calcular = tk.Button(root, text="Calcular",
+                             command=calcularBusquedaIncremental)
         calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados: ")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Intervalo y paso:")
+        x_result.grid()
+
     elif metodo == "Newton":
         label = tk.Label(root, text="Newton", font=("Arial", 20))
         label.grid()
@@ -177,6 +191,7 @@ def definirMetodo(root, metodo):
         calcular = tk.Button(root, text="Calcular", command=lambda: newton_lambda(
             fEntry.get(), derivadaEntry.get(), float(x0Entry.get()), float(tolEntry.get()), int(NmaxEntry.get()), root, operaciones, atras))
         calcular.grid()
+
     elif metodo == "Punto fijo":
         print("Punto fijo")
     elif metodo == "Raices multiples":
@@ -368,7 +383,6 @@ def definirMetodo(root, metodo):
 
         x_result = tk.Label(root, text="Valores de x:")
         x_result.grid()
-
     elif metodo == "Gauss con pivoteo total":
         def calcularGaussTotal(A_str, b_str):
             A_rows = A_str.split(';')
@@ -607,7 +621,7 @@ def definirMetodo(root, metodo):
 
         x_result = tk.Label(root, text="Valores de x:")
         x_result.grid()
-        
+
     elif metodo == "LaGrange":
         label = tk.Label(root, text="LaGrange", font=("Arial", 20))
         label.grid()

@@ -1,7 +1,15 @@
+from matplotlib.backends.backend_tkagg import (
+    FigureCanvasTkAgg,
+    NavigationToolbar2Tk
+)
+from matplotlib.figure import Figure
 import math
 import tabulate as tabulate
 from tabla import tabla
 from tkinter import *
+import matplotlib
+
+matplotlib.use('TkAgg')
 
 
 def biseccion(f, a, b, tol, Nmax, root, operaciones, error, atras):
@@ -75,6 +83,21 @@ def biseccionRelativo(f, a, b, tol, Nmax, root, operaciones, atras):
 
     t = tabla(resultados, root, atras)
 
+    graficoError = Figure(figsize=(5, 4), dpi=100)
+
+    canva_error = FigureCanvasTkAgg(graficoError, master=root)
+    canva_error.draw()
+
+    axes = graficoError.add_subplot()
+
+    axes.bar(range(len(resultados)), [row[7]
+             for row in resultados], color='red')
+    axes.set_title("Error relativo")
+    axes.set_xlabel("Iteraciones")
+    axes.set_ylabel("Error relativo")
+
+    canva_error.get_tk_widget().grid()
+
 
 def biseccionAbsoluto(f, a, b, tol, Nmax, root, operaciones, atras):
     resultados = []
@@ -137,6 +160,21 @@ def biseccionAbsoluto(f, a, b, tol, Nmax, root, operaciones, atras):
     e.insert(END, "E")
 
     t = tabla(resultados, root, atras)
+
+    graficoError = Figure(figsize=(5, 4), dpi=100)
+
+    canva_error = FigureCanvasTkAgg(graficoError, master=root)
+    canva_error.draw()
+
+    axes = graficoError.add_subplot()
+
+    axes.bar(range(len(resultados)), [row[7]
+             for row in resultados], color='red')
+    axes.set_title("Error absoluto")
+    axes.set_xlabel("Iteraciones")
+    axes.set_ylabel("Error absoluto")
+
+    canva_error.get_tk_widget().grid()
 
 
 def numero_de_iteraciones(a, b, E):
