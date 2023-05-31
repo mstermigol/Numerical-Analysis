@@ -324,17 +324,229 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
 
 [Anotaciones](#anotaciones-punto-fijo)
 
+#### Absoluto
+    Inicio
+    InicioFuncion punto_fijo_absoluto(g, xo, tol, Nmax)
+        resultados = []
+        xAnterior = xo
+        gxAnterior = g(xAnterior)
+        E = 1000
+        iter = 0
+        Añadir a resultados [iter, xo, "N/A"]
+        
+        Mientras E > tol y iter < Nmax Hacer
+            xActual = gxAnterior
+            E = V. Absoluto de xActual-xAnterior
+            iter += 1
+            Añadir a resultados [iter, xActual, E]
+            xAnterior = xActual
+            gxAnterior = g(xAnterior)
+        FinMientras
+        return resultados
+    FinFuncion
+    Fin
+
+#### Relativo
+    Inicio
+    InicioFuncion punto_fijo_relativo(g, xo, tol, Nmax)
+        resultados = []
+        xAnterior = xo
+        gxAnterior = g(xAnterior)
+        e = 1000
+        iter = 0
+        Añadir a resultados [iter, xo, "N/A"]
+        
+        Mientras V. Absoluto de e > tol y iter < Nmax Hacer
+            xActual = gxAnterior
+            E = V. Absoluto de xActual-xAnterior
+            e = E / xActual
+            iter += 1
+            Añadir a resultados [iter, xActual, e]
+            xAnterior = xActual
+            gxAnterior = g(xAnterior)
+        FinMientras
+        return resultados
+    FinFuncion
+    Fin
+
 ### Seudocódigo raíces múltiples
 
 [Anotaciones](#anotaciones-raices-multiples)
+
+#### Absoluto
+    Inicio
+    InicioFuncion raices_multiples_absoluto(f, primeraDerivada, segundaDerivada, xo, tol, Nmax)
+        resultados = []
+        xAnterior = xo
+        fAnterior = f(xAnterior)
+        E = 1000
+        iter = 0
+        Añadir a resultados [iter, xAnterior, fAnterior, "N/A"]
+        primeraDerivadaAnterior = primeraDerivada(xAnterior)
+        segundaDerivadaAnterior = segundaDerivada(xAnterior)
+        
+        Mientras E > tol y iter < Nmax Hacer
+            xActual = xAnterior-fAnterior*(primeraDerivadaAnterior/((primeraDerivadaAnterior)**2-fAnterior*segundaDerivadaAnterior))
+            fActual = f(xActual)
+            E = V. Absoluto de xActual-xAnterior
+            iter += 1
+            xAnterior = xActual
+            fAnterior = fActual
+            Añadir a resultados [iter, xAnterior, fAnterior, E]
+        FinMientras
+        return resultados
+    FinFuncion
+    Fin
+
+#### Relativo
+    Inicio
+    InicioFuncion raices_multiples_relativo(f, primeraDerivada, segundaDerivada, xo, tol, Nmax)
+        resultados = []
+        xAnterior = xo
+        fAnterior = f(xAnterior)
+        e = 1000
+        iter = 0
+        Añadir a resultados [iter, xAnterior, fAnterior, "N/A"]
+        primeraDerivadaAnterior = primeraDerivada(xAnterior)
+        segundaDerivadaAnterior = segundaDerivada(xAnterior)
+        
+        Mientras V. Absoluto de e > tol y iter < Nmax Hacer
+            xActual = xAnterior-fAnterior*(primeraDerivadaAnterior/((primeraDerivadaAnterior)**2-fAnterior*segundaDerivadaAnterior))
+            fActual = f(xActual)
+            E = V. Absoluto de xActual-xAnterior
+            e = E / xActual
+            iter += 1
+            xAnterior = xActual
+            fAnterior = fActual
+            Añadir a resultados [iter, xAnterior, fAnterior, e]
+        FinMientras
+        return resultados
+    FinFuncion
+    Fin
 
 ### Seudocódigo secante
 
 [Anotaciones](#anotaciones-secante)
 
+#### Absoluto
+    Inicio
+    InicioFuncion secante_absoluto(f, xo, x1, tol, Nmax)
+        resultados = []
+        fo = f(xo)
+        Añadir a resultados [iter, xo, fo, "N/A"]
+        f1 = f(x1)
+        E = V. Absoluto de x1-xo
+        iter = 1
+        Añadir a resultados [iter, x1, f1, E]
+        
+        Mientras E > tol y iter < Nmax Hacer
+            xActual = x1 - (f1 * (x1-x0)) / (f1-f0)
+            fActual = f(xActual)
+            E = V. Absoluto de xActual-x1
+            iter =+ 1
+            x0 = x1
+            f0 = f1
+            x1 = xActual
+            f1 = fActual
+            Añadir a resultados [iter, x1, f1, E]
+        FinMientras
+        return resultados
+    FinFuncion
+    Fin
+
+#### Relativo
+    Inicio
+    InicioFuncion secante_relativo(f, xo, x1, tol, Nmax)
+        resultados = []
+        fo = f(xo)
+        Añadir a resultados [iter, xo, fo, "N/A"]
+        f1 = f(x1)
+        E = V. Absoluto de x1-xo
+        e = E / x1
+        iter = 1
+        Añadir a resultados [iter, x1, f1, e]
+        
+        Mientras abs(e) > tol y iter < Nmax Hacer
+            xActual = x1 - (f1 * (x1-x0)) / (f1-f0)
+            fActual = f(xActual)
+            E = V. Absoluto de xActual-x1
+            e = E / xActual
+            iter =+ 1
+            x0 = x1
+            f0 = f1
+            x1 = xActual
+            f1 = fActual
+            Añadir a resultados [iter, x1, f1, e]
+        FinMientras
+        return resultados
+    FinFuncion
+    Fin
+
 ### Seudocódigo regla falsa
 
 [Anotaciones](#anotaciones-regla-falsa)
+
+#### Absoluto
+    Inicio
+    InicioFuncion regla_falsa_absoluto(f, a, b, tol, Nmax)
+        resultados = []
+        fa = f(a)
+        fb = f(b)
+        puntoMedio = (fb*a-fa*b)/(fb-fa)
+        fPuntoMedio = f(puntoMedio)
+        E = 1000
+        iter = 1
+        Añadir a resultados [0, a, fa, puntoMedio, fPuntoMedio, b, fb, "N/A"]
+        
+        Mientras E > tol y iter < Nmax Hacer
+            Si fa*fPuntoMedio < 0:
+                b = puntoMedio
+            else:
+                a = puntoMedio
+            fa = f(a)
+            fb = f(b)
+            p0 = puntoMedio
+            puntoMedio = (fb*a-fa*b)/(fb-fa)
+            fPuntoMedio = f(puntoMedio)
+            E = V. Absoluto de puntoMedio-p0
+            Añadir a resultados [iter, a, fa, puntoMedio, fPuntoMedio, b, fb, E]
+            iter =+ 1            
+        FinMientras
+        return resultados
+    FinFuncion
+    Fin
+
+#### Relativo
+    Inicio
+    InicioFuncion regla_falsa_relativo(f, a, b, tol, Nmax)
+        resultados = []
+        fa = f(a)
+        fb = f(b)
+        puntoMedio = (fb*a-fa*b)/(fb-fa)
+        fPuntoMedio = f(puntoMedio)
+        E = 1000
+        e = E / puntoMedio
+        iter = 1
+        Añadir a resultados [0, a, fa, puntoMedio, fPuntoMedio, b, fb, "N/A"]
+        
+        Mientras V. Absoluto de e > tol y iter < Nmax Hacer
+            Si fa*fPuntoMedio < 0:
+                b = puntoMedio
+            else:
+                a = puntoMedio
+            fa = f(a)
+            fb = f(b)
+            p0 = puntoMedio
+            puntoMedio = (fb*a-fa*b)/(fb-fa)
+            fPuntoMedio = f(puntoMedio)
+            E = V. Absoluto de puntoMedio-p0
+            e = E / puntoMedio
+            Añadir a resultados [iter, a, fa, puntoMedio, fPuntoMedio, b, fb, e]
+            iter =+ 1            
+        FinMientras
+        return resultados
+    FinFuncion
+    Fin
 
 ### Seudocódigo Cholesky
 
