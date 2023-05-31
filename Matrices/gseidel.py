@@ -1,29 +1,3 @@
-"""function [x,iter,err]=C17_gseidel(A,b,x0,tol,Nmax)
-
-%Inicializaci�n 
-D=diag(diag(A));
-L=-tril(A)+D;
-U=-triu(A)+D;
-T=inv(D-L)*U; 
-C=inv(D-L)*b;
-xant=x0;
-E=1000;
-cont=0;
-
-%Ciclo
-while E>tol && cont<Nmax       
-    xact=T*xant+C;
-    E=norm(xant-xact);
-    xant=xact;
-    cont=cont+1;
-end
-
-%Entrega de resultados
-x=xact;
-iter=cont;
-err=E;
-end"""
-
 import numpy as np
 
 def gseidel(A, b, x0, tol, Nmax):

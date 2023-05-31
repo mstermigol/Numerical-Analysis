@@ -314,10 +314,8 @@ def definirMetodo(root, metodo):
             A = np.array(A_values)
             b = np.array(list(map(float, b_str.split(','))))
 
-            # Llamar a la función de eliminación gaussiana con las entradas proporcionadas
             x = gausspl(A, b)
 
-            # Mostrar los resultados en la interfaz de Tkinter
             x_result.config(text="Valores de x: " + str(x))
 
         label = tk.Label(root, text="Eliminación Gaussiana",
@@ -352,10 +350,8 @@ def definirMetodo(root, metodo):
             A = np.array(A_values)
             b = np.array(list(map(float, b_str.split(','))))
 
-            # Llamar a la función de eliminación gaussiana con las entradas proporcionadas
             x = gausspar(A, b)
 
-            # Mostrar los resultados en la interfaz de Tkinter
             x_result.config(text="Valores de x: " + str(x))
 
         label = tk.Label(
@@ -390,10 +386,8 @@ def definirMetodo(root, metodo):
             A = np.array(A_values)
             b = np.array(list(map(float, b_str.split(','))))
 
-            # Llamar a la función de eliminación gaussiana con las entradas proporcionadas
             x = gausstot(A, b)
 
-            # Mostrar los resultados en la interfaz de Tkinter
             x_result.config(text="Valores de x: " + str(x))
 
         label = tk.Label(
@@ -556,10 +550,8 @@ def definirMetodo(root, metodo):
             A = np.array(A_values)
             b = np.array(list(map(float, b_str.split(','))))
 
-            # Llamar a la función de eliminación gaussiana con las entradas proporcionadas
             x = LUparcial(A, b)
 
-            # Mostrar los resultados en la interfaz de Tkinter
             x_result.config(text="Valores de x: " + str(x))
 
         label = tk.Label(root, text="LU parcial", font=("Arial", 20))
