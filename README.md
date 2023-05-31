@@ -148,22 +148,27 @@ Los métodos se distribuyeron de la siguiente manera:
 ### Anotaciones Gauss total
 
 [Seudocódigo](#seudocódigo-gauss-total)
+La matriz ingresada debe ser cuadrada. Y que sus valores sean o enteros o flotantes. Y que la matriz no sea singular.
 
 ### Anotaciones Gauss-Seidel
 
 [Seudocódigo](#anotaciones-gauss-seidel)
+La matriz ingresada debe ser cuadrada. Y que sus valores sean o enteros o flotantes. La matriz A debe ser invertible para evitar errores o resultados inesperados.
 
 ### Anotaciones Jacobi
 
 [Seudocódigo](#seudocódigo-jacobi)
+La matriz ingresada debe ser cuadrada. Y que sus valores sean o enteros o flotantes. La matriz A debe ser diagonalmente dominante y que su diagonal no sean ceros.
 
 ### Anotaciones LU parcial
 
 [Seudocódigo](#seudocódigo-lu-parcial)
+La matriz ingresada debe ser cuadrada. Y que sus valores sean o enteros o flotantes. Y que la matriz no sea singular.
 
 ### Anotaciones LU simple
 
 [Seudocódigo](#seudocódigo-lu-simple)
+La matriz ingresada debe ser cuadrada. Y que sus valores sean o enteros o flotantes. Y que la matriz no sea singular y sea invertible.
 
 ### Anotaciones Lagrange
 
@@ -475,21 +480,146 @@ Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
 
 [Anotaciones](#anotaciones-gauss-total)
 
+    Función gausstot(A, b)
+        n = tamaño de columnas de A
+        M = concatenar A y b en una matriz extendida
+        cambi = lista vacía
+
+        Para i desde 0 hasta n-1
+            (a, b) = posición del máximo valor en la submatriz M[i:n, i:n]
+
+            Si b[0]+i != i
+                intercambiar columnas b[0]+i e i en la matriz M
+                agregar [i, b[0]+i] a la lista cambi
+
+            Si a[0]+i != i
+                intercambiar filas a[0]+i e i en la matriz M
+
+            Para j desde i+1 hasta n
+                Si M[j, i] != 0
+                    M[j, i:n+1] = M[j, i:n+1] - (M[j, i]/M[i, i])*M[i, i:n+1]
+
+        x = sustregrM(M)
+
+        Para i desde longitud(cambi)-1 hasta 0, decrementando en 1
+            aux = x[cambi[i][0]]
+            x[cambi[i][0]] = x[cambi[i][1]]
+            x[cambi[i][1]] = aux
+
+        Retornar x
+
 ### Seudocódigo Gauss-Seidel
 
 [Anotaciones](#anotaciones-gauss-seidel)
+
+    función gseidel(A, b, x0, tol, Nmax):
+        D = obtener diagonal de A
+        L = matriz triangular inferior de A con ceros en la diagonal
+        U = matriz triangular superior de A con ceros en la diagonal
+        T = (D-L)^(-1) * U
+        C = (D-L)^(-1) * b
+        xant = x0
+        E = 1000
+        cont = 0
+
+        mientras E > tol y cont < Nmax:
+            xact = T * xant + C
+            E = norma de xant - xact
+            xant = xact
+            cont += 1
+
+        x = xact
+        iter = cont
+        err = E
+        retornar x, iter, err
 
 ### Seudocódigo Jacobi
 
 [Anotaciones](#anotaciones-jacobi)
 
+    Función jacobi(A, b, x0, tol, Nmax):
+        D = matriz diagonal con los elementos diagonales de A
+        Imprimir inversa de D
+        L = matriz triangular inferior de A - D
+        U = matriz triangular superior de A - D
+        Imprimir L + U
+        T = inversa de D multiplicada por (L + U)
+        Imprimir T
+        Imprimir valores propios de T
+        C = inversa de D multiplicada por b
+        xant = x0
+        E = 1000
+        cont = 0
+
+        Mientras E > tol y cont < Nmax:
+            xact = T multiplicada por xant más C
+            E = norma euclidiana de la diferencia entre xant y xact
+            xant = xact
+            cont = cont + 1
+
+        x = xact
+        iter = cont
+        err = E
+        retornar x, iter, err
+
+
 ### Seudocódigo LU parcial
 
 [Anotaciones](#anotaciones-lu-parcial)
 
+    función LUparcial(A, b):
+        n = tamaño de A (filas)
+        L = matriz identidad de tamaño n x n
+        U = matriz de ceros de tamaño n x n
+        P = matriz identidad de tamaño n x n
+        M = copia de A
+
+        para i en rango(0, n-1):
+            aux0 = máximo valor absoluto en M[i:n, i]
+            aux = coordenadas del máximo en M[i:n, i]
+
+            si aux0 > valor absoluto de M[i, i]:
+                intercambiar filas y columnas en M, P y L para que el máximo quede en M[i, i]
+
+            para j en rango(i+1, n):
+                si M[j, i] != 0:
+                    L[j, i] = M[j, i] / M[i, i]
+                    actualizar filas correspondientes en L y M para realizar eliminación gaussiana
+
+            actualizar filas i y i+1 en U con los valores correspondientes de M
+
+        asignar el último elemento de la diagonal de M a U[n-1, n-1]
+
+        z = sustprgr(L, producto de P por b)
+        x = sustregr(U, z)
+
+        retornar x
+
 ### Seudocódigo LU simple
 
 [Anotaciones](#anotaciones-lu-simple)
+
+    función LUsimpl(A, b):
+        n = tamaño de A en la dimensión 0
+        L = matriz identidad de tamaño nxn
+        U = matriz de ceros de tamaño nxn
+        M = copia de A
+
+        para i desde 0 hasta n-1:
+            para j desde i+1 hasta n:
+                si M[j, i] != 0:
+                    L[j, i] = M[j, i] / M[i, i]
+                    M[j, i:n] = M[j, i:n] - (M[j, i] / M[i, i]) * M[i, i:n]
+
+            U[i, i:n] = M[i, i:n]
+            U[i+1, i+1:n] = M[i+1, i+1:n]
+
+        U[n-1, n-1] = M[n-1, n-1]
+
+        z = sustprgr(L, b)
+        x = sustregr(U, z)
+
+        retornar x
 
 ### Seudocódigo Lagrange
 
