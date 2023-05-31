@@ -102,14 +102,18 @@ Los métodos se distribuyeron de la siguiente manera:
 ### Anotaciones bisección
 
 [Seudocódigo](#seudocódigo-bisección)
+Revisar las anotaciones generales para ver la forma de ingresar la función.
+Elegir con que error se va a trabajar (Relativo o Absoluto).
 
 ### Anotaciones busquedas incrementales
 
 [Seudocódigo](#seudocódigo-busquedas-incrementales)
+Revisar las anotaciones generales para ver la forma de ingresar la función.
 
 ### Anotaciones Newton
 
 [Seudocódigo](#seudocódigo-newton)
+Revisar las anotaciones generales para ver la forma de ingresar la función y su respectiva derivada.
 
 ### Anotaciones punto fijo
 
@@ -148,10 +152,14 @@ Se tiene que ingresar matrices simetricas, que la matriz sea no singular y que l
 ### Anotaciones Gauss simple
 
 [Seudocódigo](#seudocódigo-gauss-simple)
+A la hora de ingresar los valores, estos se tienen que ingresar separados por “,” (coma) así _1,2,3,4_ además que todos los valores deben ser enteros o flotantes (nada de caracteres)
+La matriz ingresada debe ser cuadrada. Y que sus valores sean o enteros o flotantes. Y que la matriz no sea singular.
 
 ### Anotaciones Gauss parcial
 
 [Seudocódigo](#seudocódigo-gauss-parcial)
+A la hora de ingresar los valores, estos se tienen que ingresar separados por “,” (coma) así _1,2,3,4_ además que todos los valores deben ser enteros o flotantes (nada de caracteres)
+La matriz ingresada debe ser cuadrada. Y que sus valores sean o enteros o flotantes. Y que la matriz no sea singular.
 
 ### Anotaciones Gauss total
 
