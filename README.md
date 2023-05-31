@@ -7,10 +7,23 @@
     - [Absoluto](#absoluto)
   - [Seudocódigo busquedas incrementales](#seudocódigo-busquedas-incrementales)
   - [Seudocodigo Newton](#seudocodigo-newton)
+  - [Seudocodigo punto fijo](#seudocodigo-punto-fijo)
+  - [Seudocodigo raices multiples](#seudocodigo-raices-multiples)
+  - [Seudocodigo secante](#seudocodigo-secante)
+  - [Seudocodigo regla falsa](#seudocodigo-regla-falsa)
+  - [Seudocódigo Cholesky](#seudocódigo-cholesky)
+  - [Seudocódigo Crout](#seudocódigo-crout)
+  - [Seudocódigo Doolittle](#seudocódigo-doolittle)
   - [Seudocódigo Gauss simple](#seudocódigo-gauss-simple)
   - [Seudocódigo Gauss parcial](#seudocódigo-gauss-parcial)
-  - [Seudocódigo Cholesky](#seudocódigo-cholesky)
+  - [Seudocódigo Gauss total](#seudocódigo-gauss-total)
+  - [Seudocódigo Gauss-Seidel](#seudocódigo-gauss-seidel)
+  - [Seudocódigo Jacobi](#seudocódigo-jacobi)
+  - [Seudocódigo LU parcial](#seudocódigo-lu-parcial)
+  - [Seudocódigo LU simple](#seudocódigo-lu-simple)
   - [Seudocódigo Lagrange](#seudocódigo-lagrange)
+  - [Seudocódigo diferencias divididas](#seudocódigo-diferencias-divididas)
+  - [Seudocódigo Vandermonde](#seudocódigo-vandermonde)
 
 ## Manual de usuario
 
@@ -179,6 +192,99 @@ del real, así que se debe evitar extrapolar con este método
     FinNewton
     Fin
 
+### Seudocodigo punto fijo
+
+### Seudocodigo raices multiples
+
+### Seudocodigo secante
+
+### Seudocodigo regla falsa
+
+### Seudocódigo Cholesky
+
+    Entradas A, b
+    Salidas x []
+
+    funcion Cholesky (A, b)
+    n = tamaño de a
+    L = matriz con diagonal de 1s tamaño n
+    U = matriz con diagonal de 1s tamaño n
+
+    para i desde 0 hasta n-1
+        L[i,i]=raiz(A[i,i]-producto punto(L[i, 0:i], U[0:i, i]))
+        U[i, i] = L[i, i]
+
+        para j desde i+1 hasta n
+            L[j, i] = (A[j, i] - producto punto(L[j, 0:i], U[0:i, i]))/U[i, i]
+        finpara
+        para j desde i+1 hasta n
+            U[i, j] = (A[i, j] - producto punto(L[i, 0:i], U[0:i, j]))/L[i, i]
+        finpara
+
+        L[n-1, n-1] = raiz(A[n-1, n-1] - producto punto(L[n-1, 0:n-1], U[0:n-1, n-1]))
+        U[n-1, n-1] = L[n-1, n-1]
+
+    finpara
+
+    z = sustitucion progresiva (L, b)
+    x = sustitucion regresiva (U, z)
+
+    retorno x
+
+### Seudocódigo Crout
+
+    Entradas: A, b
+    Salidas: x[]
+
+    funcion crout (A, b)
+        n = tamaño de A
+        L = matriz con diagonal de 1s tamaño n
+        U = matriz con diagonal de 1s tamaño n
+
+        para i desde 0 hasta n-1
+            para j desde i hasta n
+                U[i, j] = A[i, j] - producto punto(L[i, 0:i], U[0:i, j])
+            finpara
+
+            para j desde i+1 hasta n
+                L[j, i] = (A[j, i] - producto punto(L[j, 0:i], U[0:i, i]))/U[i, i]
+            finpara
+
+            L[n-1, n-1] = A[n-1, n-1] - producto punto(L[n-1, 0:n-1], U[0:n-1, n-1])
+
+            z = sustitucion progresiva (L, b)
+            x = sustitucion regresiva (U, z)
+        finpara
+
+        return x
+
+### Seudocódigo Doolittle
+
+    Entradas: A, b
+    Salidas: x[]
+
+    funcion doolittle (A, b)
+        n = tamaño de A
+        L = matriz con diagonal de 1s tamaño n
+        U = matriz con diagonal de 1s tamaño n
+
+        para i desde 0 hasta n-1
+            para j desde i hasta n
+                U[i, j] = A[i, j] - producto punto(L[i, 0:i], U[0:i, j])
+            finpara
+
+            para j desde i+1 hasta n
+                L[j, i] = (A[j, i] - producto punto(L[j, 0:i], U[0:i, i]))/U[i, i]
+            finpara
+
+            U[n-1, n-1] = A[n-1, n-1] - producto punto(L[n-1, 0:n-1], U[0:n-1, n-1])
+
+            z = sustitucion progresiva (L, b)
+            x = sustitucion regresiva (U, z)
+        finpara
+
+        return x
+
 ### Seudocódigo Gauss simple
 
     Inicio
@@ -240,48 +346,111 @@ del real, así que se debe evitar extrapolar con este método
         x = sustregrM(M)
         return x
 
-### Seudocódigo Cholesky
+### Seudocódigo Gauss total
 
-    Entradas A, b
-    Salidas x []
+### Seudocódigo Gauss-Seidel
 
-    funcion Cholesky (A, b)
-    n = tamaño de a
-    L = matriz con diagonal de 1s tamaño n
-    U = matriz con diagonal de 1s tamaño n
+### Seudocódigo Jacobi
 
-    para i desde 0 hasta n-1
-        L[i,i]=raiz(A[i,i]-producto punto(L[i, 0:i], U[0:i, i]))
-        U[i, i] = L[i, i]
+### Seudocódigo LU parcial
 
-        para j desde i+1 hasta n
-            L[j, i] = (A[j, i] - producto punto(L[j, 0:i], U[0:i, i]))/U[i, i]
-        finpara
-        para j desde i+1 hasta n
-            U[i, j] = (A[i, j] - producto punto(L[i, 0:i], U[0:i, j]))/L[i, i]
-        finpara
-
-        L[n-1, n-1] = raiz(A[n-1, n-1] - producto punto(L[n-1, 0:n-1], U[0:n-1, n-1]))
-        U[n-1, n-1] = L[n-1, n-1]
-
-    finpara
-
-    z = sustitucion progresiva (L, b)
-    x = sustitucion regresiva (U, z)
-
-    retorno x
+### Seudocódigo LU simple
 
 ### Seudocódigo Lagrange
 
     Entradas x, y, punto
     Salidas p
 
-    n = size(x)
-    p = 0
-    for i in range(n):
-        L = yi
-        for j in range(n):
-            if i != j:
-                L = L*(punto-xj)/(xi-xj)
-            p = p + L
-    return p
+    funcion lagrange (x, y, punto)
+        n = size(x)
+        p = 0
+        para i desde 0 hasta n:
+            L = yi
+            para j desde 0 hasta n:
+                si i != j:
+                    L = L*(punto-xj)/(xi-xj)
+                finsi
+                p = p + L
+            finpara
+        finpara
+
+        return p
+
+### Seudocódigo diferencias divididas
+
+    Entradas: x, y, puntos
+    Salidas: Polinomio, p(puntos)
+
+    funcion diferencias (x, y, puntos)
+        a = []
+        para i desde 0 hasta len(x)+1
+            aux = []
+            para j de 0 hasta len(x)
+                aux.append(0)
+            finpara
+            a.append(aux)
+        finpara
+
+        para i desde 0 hasta len(x)
+            a[0][i] = x[i]
+            a[1][i] = y[i]
+        finpara
+
+        b = 1
+        c = 1
+        d = 1
+
+        para i desde 0 hasta len(a[0])
+            para j desde 0 hasta len(a[0])-b
+                a[c+1][j]=(a[c][j+1]-a[c][j])/(a[0][j+d]-a[0][j])
+            finpara
+
+            b = b + 1
+            c = c + 1
+            d = d + 1
+        finpara
+
+        p = 0
+        w = 0
+
+        para i desde 0 hasta len(a[0])
+            terminos = 1
+            para j desde 0 hasta w
+                terminos = terminos * (x-a[0][j])
+            finpara
+
+            p = p + a[i+1][0] * terminos
+            w = w + 1
+        finpara
+
+        para punto en puntos
+            print(p(punto))
+        finpara
+
+### Seudocódigo Vandermonde
+
+    Entradas: x, y, puntos
+    Salidas: coeficientes, valores
+
+    funcion vandermonde (x, y, punto)
+        N = len(x)
+        A = matriz de ceros tamaño NxN
+
+        para i desde 0 hasta N
+            para j desde 0 hasta N
+                si j == 0
+                    A[i, j] = 1
+                si no
+                    A[i, j] = x[i]**j
+                finsi
+            finpara
+        finpara
+
+        coeficientes = producto punto(inversa(A), y)
+
+        para i desde 0 hasta len(puntos)
+            resultado = 0
+            para j desde 0 hasta N
+                resultado = resultado + coeficientes[j] * (puntos[i]**j)
+            finpara
+            print(p(puntos[i]) = resultado)

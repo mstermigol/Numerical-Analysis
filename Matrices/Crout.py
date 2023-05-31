@@ -13,7 +13,7 @@ def crout(A, b):
             U[i, j] = A[i, j] - np.dot(L[i, 0:i], U[0:i, j])
         for j in range(i+1, n):
             L[j, i] = (A[j, i] - np.dot(L[j, 0:i], U[0:i, i]))/U[i, i]
-    U[n-1, n-1] = A[n-1, n-1] - np.dot(L[n-1, 0:n-1], U[0:n-1, n-1])
+    L[n-1, n-1] = A[n-1, n-1] - np.dot(L[n-1, 0:n-1], U[0:n-1, n-1])
 
     z = sustprgr(L, b)
     x = sustregr(U, z)

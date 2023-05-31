@@ -37,7 +37,6 @@ def doolitle_solucion(A, b):
     U[n-1, n-1] = A[n-1, n-1] - np.dot(L[n-1, 0:n-1], U[0:n-1, n-1])
 
     z = sustprgr(L, b)
-    print(z)
     x = sustregr(U, z)
 
     return x
