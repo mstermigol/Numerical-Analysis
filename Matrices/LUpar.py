@@ -35,14 +35,6 @@ def LUparcial(A, b):
     z = sustprgr(L, np.dot(P, b))
     x = sustregr(U, z)
 
-    #print("L: ")
-    #print(L)
-    #print("\nU: ")
-    #print(U)
-    #print("\nP: ")
-    #print(P)
-
-    #print("\nValores de x: ")
     return x
 
 """
