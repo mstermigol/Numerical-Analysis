@@ -1,19 +1,26 @@
 import math
 import tabulate as tabulate
+from tabla import tabla
+from tkinter import *
 
+def secante(f, x0, x1, tol, Nmax, root, operaciones, error, atras):
+    if error == "Error absoluto":
+        secante_absoluto(f, x0, x1, tol, Nmax, root, operaciones, atras)
+    else:
+        secante_relativo(f, x0, x1, tol, Nmax, root, operaciones, atras)
 
-def secante(f, x0, x1, tol, Nmax):
+def secante_absoluto(f, x0, x1, tol, Nmax, root, operaciones, atras):
     resultados = []
-    f0 = f(x0)
+    f0 = eval(f, operaciones, {'x': x0})
     resultados.append([0, x0, f0, "N/A"])
-    f1 = f(x1)
+    f1 = eval(f, operaciones, {'x': x1})
     E = abs(x1-x0)
     cont = 1
     resultados.append([cont, x1, f1, E])
 
     while E > tol and cont < Nmax:
-        xActual = x1 - (f(x1) * (x1-x0)) / (f(x1)-f(x0))
-        fActual = f(xActual)
+        xActual = x1 - (f1 * (x1-x0)) / (f1-f0)
+        fActual = eval(f, operaciones, {'x': xActual})
         E = abs(xActual-x1)
         cont = cont + 1
         x0 = x1
@@ -22,39 +29,68 @@ def secante(f, x0, x1, tol, Nmax):
         f1 = fActual
         resultados.append([cont, x1, f1, E])
 
-    print(tabulate.tabulate(resultados, headers=[
-        "Iteracion", "Valor de x", "Valor eval f(x)", "Error abs"], tablefmt="fancy_grid"))
+    for widget in root.winfo_children():
+        if widget != atras:
+            widget.destroy()
 
+    e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
+    e.grid(row=0, column=0)
+    e.insert(END, "Iteración")
 
-def ojo_de_halcon():  # Parcial 2 2019-2
-    x = 14.2
-    y = 1.8
-    g = 6.4
-    vo = 25.4
-    tol = 10**-5
-    def f(teta): return y - (x * math.tan(teta) -
-                             ((g*x**2)/(2*vo**2*math.cos(teta)**2)))
+    e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
+    e.grid(row=0, column=1)
+    e.insert(END, "Valor de x")
 
-    secante(f, 0, 1, tol, 1000)
+    e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
+    e.grid(row=0, column=2)
+    e.insert(END, "Valor de f(x)")
 
+    e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
+    e.grid(row=0, column=3)
+    e.insert(END, "Error absoluto")
 
-# ojo_de_halcon()
+    t = tabla(resultados, root, atras)
 
-def Dolan():  # Parcial 2 2021-1
-    a = -1
-    b = -1.5
-    tol = 1e-5
-    def f(x): return x**3-x**2-2*x+2+math.sin(x-1)
-    secante(f, a, b, tol, 1000)
+def secante_relativo(f, x0, x1, tol, Nmax, root, operaciones, atras):
+    resultados = []
+    f0 = eval(f, operaciones, {'x': x0})
+    resultados.append([0, x0, f0, "N/A"])
+    f1 = eval(f, operaciones, {'x': x1})
+    E = abs(x1-x0)
+    e = E /x1
+    cont = 1
+    resultados.append([cont, x1, f1, e])
 
+    while abs(e) > tol and cont < Nmax:
+        xActual = x1 - (f1 * (x1-x0)) / (f1-f0)
+        fActual = eval(f, operaciones, {'x': xActual})
+        E = abs(xActual-x1)
+        e = E/xActual
+        cont = cont + 1
+        x0 = x1
+        f0 = f1
+        x1 = xActual
+        f1 = fActual
+        resultados.append([cont, x1, f1, e])
 
-# Dolan()
+    for widget in root.winfo_children():
+        if widget != atras:
+            widget.destroy()
 
-def fuerza():  # Parcial 2021-1 grupo 2
-    F = 10000
-    tol = 1e-4
-    def f(d): return d - (3*d/math.sqrt(d**2+9)) - F/1000
-    secante(f, 1, 2, tol, 1000)
+    e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
+    e.grid(row=0, column=0)
+    e.insert(END, "Iteración")
 
+    e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
+    e.grid(row=0, column=1)
+    e.insert(END, "Valor de x")
 
-fuerza()
+    e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
+    e.grid(row=0, column=2)
+    e.insert(END, "Valor de f(x)")
+
+    e = Entry(root, width=20, fg='Blue', font=('Arial', 10))
+    e.grid(row=0, column=3)
+    e.insert(END, "Error relativo")
+
+    t = tabla(resultados, root, atras)
