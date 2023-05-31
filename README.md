@@ -1,16 +1,34 @@
 - [Manual de usuario](#manual-de-usuario)
   - [Anotaciones generales](#anotaciones-generales)
+  - [Anotaciones busquedas incrementales](#anotaciones-busquedas-incrementales)
+  - [Anotaciones Newton](#anotaciones-newton)
+  - [Anotaciones punto fijo](#anotaciones-punto-fijo)
+  - [Anotaciones raices multiples](#anotaciones-raices-multiples)
+  - [Anotaciones secante](#anotaciones-secante)
+  - [Anotaciones regla falsa](#anotaciones-regla-falsa)
+  - [Anotaciones Cholesky](#anotaciones-cholesky)
+  - [Anotaciones Crout](#anotaciones-crout)
+  - [Anotaciones Doolittle](#anotaciones-doolittle)
+  - [Anotaciones Gauss simple](#anotaciones-gauss-simple)
+  - [Anotaciones Gauss parcial](#anotaciones-gauss-parcial)
+  - [Anotaciones Gauss total](#anotaciones-gauss-total)
+  - [Anotaciones Gauss-Seidel](#anotaciones-gauss-seidel)
+  - [Anotaciones Jacobi](#anotaciones-jacobi)
+  - [Anotaciones LU parcial](#anotaciones-lu-parcial)
+  - [Anotaciones LU simple](#anotaciones-lu-simple)
   - [Anotaciones Lagrange](#anotaciones-lagrange)
-- [Seudocodigos](#seudocodigos)
+  - [Anotaciones diferencias divididas](#anotaciones-diferencias-divididas)
+  - [Anotaciones Vandermonde](#anotaciones-vandermonde)
+- [Seudocódigos](#seudocódigos)
   - [Seudocódigo bisección](#seudocódigo-bisección)
     - [Relativo](#relativo)
     - [Absoluto](#absoluto)
   - [Seudocódigo busquedas incrementales](#seudocódigo-busquedas-incrementales)
-  - [Seudocodigo Newton](#seudocodigo-newton)
-  - [Seudocodigo punto fijo](#seudocodigo-punto-fijo)
-  - [Seudocodigo raices multiples](#seudocodigo-raices-multiples)
-  - [Seudocodigo secante](#seudocodigo-secante)
-  - [Seudocodigo regla falsa](#seudocodigo-regla-falsa)
+  - [Seudocódigo Newton](#seudocódigo-newton)
+  - [Seudocódigo punto fijo](#seudocódigo-punto-fijo)
+  - [Seudocódigo raíces múltiples](#seudocódigo-raíces-múltiples)
+  - [Seudocódigo secante](#seudocódigo-secante)
+  - [Seudocódigo regla falsa](#seudocódigo-regla-falsa)
   - [Seudocódigo Cholesky](#seudocódigo-cholesky)
   - [Seudocódigo Crout](#seudocódigo-crout)
   - [Seudocódigo Doolittle](#seudocódigo-doolittle)
@@ -78,14 +96,57 @@ Los métodos se distribuyeron de la siguiente manera:
 - Regla falsa
 - Secante
 
+### Anotaciones busquedas incrementales
+
+### Anotaciones Newton
+
+### Anotaciones punto fijo
+
+### Anotaciones raices multiples
+
+### Anotaciones secante
+
+### Anotaciones regla falsa
+
+### Anotaciones Cholesky
+
+### Anotaciones Crout
+
+### Anotaciones Doolittle
+
+### Anotaciones Gauss simple
+
+### Anotaciones Gauss parcial
+
+### Anotaciones Gauss total
+
+### Anotaciones Gauss-Seidel
+
+### Anotaciones Jacobi
+
+### Anotaciones LU parcial
+
+### Anotaciones LU simple
+
 ### Anotaciones Lagrange
 
 A la hora de ingresar los valores, estos se tienen que ingresar separados por “,” (coma) así _1,2,3,4_ además que todos los valores deben ser enteros o flotantes (nada de caracteres)
 
-Si se quiere extrapolar seguramente dará un valor muy alejado
-del real, así que se debe evitar extrapolar con este método
+Si se quiere extrapolar posiblemente dará un valor muy alejado del real, así que se debe evitar extrapolar con este método
 
-## Seudocodigos
+### Anotaciones diferencias divididas
+
+A la hora de ingresar los valores, estos se tienen que ingresar separados por “,” (coma) así _1, 2, 3, 4_ además que todos los valores deben ser enteros o flotantes (nada de caracteres)
+
+Al ingresar los puntos, A la hora de ingresar los valores, estos se tienen que ingresar separados por “,” (coma) así _1, 2.5, 3, 4.5_
+
+Si se quiere extrapolar posiblemente dará un valor muy alejado del real, así que se debe evitar extrapolar con este método
+
+### Anotaciones Vandermonde
+
+Las mismas que [diferencias divididas](#anotaciones-diferencias-divididas)
+
+## Seudocódigos
 
 ### Seudocódigo bisección
 
@@ -170,7 +231,7 @@ del real, así que se debe evitar extrapolar con este método
     FinBusquedas
     Fin
 
-### Seudocodigo Newton
+### Seudocódigo Newton
 
     Inicio
     funcion newton(f, derivada, xo, tol, Nmax)
@@ -192,13 +253,13 @@ del real, así que se debe evitar extrapolar con este método
     FinNewton
     Fin
 
-### Seudocodigo punto fijo
+### Seudocódigo punto fijo
 
-### Seudocodigo raices multiples
+### Seudocódigo raíces múltiples
 
-### Seudocodigo secante
+### Seudocódigo secante
 
-### Seudocodigo regla falsa
+### Seudocódigo regla falsa
 
 ### Seudocódigo Cholesky
 
