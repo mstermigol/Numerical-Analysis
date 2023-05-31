@@ -2,6 +2,10 @@ import tkinter as tk
 from Matrices.Cholesky import cholesky
 from Raices.biseccion import biseccion
 from Raices.busquedas_incrementales import busquedas
+from Raices.punto_fijo import punto_fijo
+from Raices.secante import secante
+from Raices.regla_falsa import regla_falsa
+from Raices.raices_multiples import raices_multiples
 from Interpolacion.Lagrange import lagrange
 from Raices.newton import newton_lambda
 from Interpolacion.Newton import newtonInterpolacion
@@ -17,7 +21,7 @@ from Matrices.LUsimpl import LUsimpl
 from Matrices.gausstot import gausstot
 import numpy as np
 from math import *
-
+ 
 root = tk.Tk()
 
 root.geometry("800x600")
@@ -66,9 +70,9 @@ def inicio(root):
 
 inicio(root)
 
-operaciones = {"exp": exp, "ln(x)": log, "log(x)": log10,
-               "sin(x)": sin, "cos(x)": cos, "tan(x)": tan,
-               "sqrt(x)": sqrt, "thirdroot(x)": lambda x: x**(1/3), }
+operaciones = {"exp": exp, "ln": log, "log": log10,
+               "sin": sin, "cos": cos, "tan": tan,
+               "sqrt": sqrt, "thirdroot": lambda x: x**(1/3),}
 
 error = ["Error absoluto", "Error relativo"]
 
@@ -193,13 +197,153 @@ def definirMetodo(root, metodo):
         calcular.grid()
 
     elif metodo == "Punto fijo":
-        print("Punto fijo")
+        label = tk.Label(root, text="Punto fijo", font=("Arial", 20))
+        label.grid()
+
+        g = tk.Label(root, text="Ingrese la función g")
+        g.grid()
+        gEntry = tk.Entry(root)
+        gEntry.grid()
+
+        x0 = tk.Label(root, text="Ingrese el valor de x0")
+        x0.grid()
+        x0Entry = tk.Entry(root)
+        x0Entry.grid()
+
+        tol = tk.Label(root, text="Ingrese el valor de la tolerancia")
+        tol.grid()
+        tolEntry = tk.Entry(root)
+        tolEntry.grid()
+
+        Nmax = tk.Label(root, text="Ingrese el valor de Nmax")
+        Nmax.grid()
+        NmaxEntry = tk.Entry(root)
+        NmaxEntry.grid()
+
+        dropdown = tk.OptionMenu(root, errorSeleccionado, *error)
+        dropdown.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: punto_fijo(
+            gEntry.get(), float(x0Entry.get()), float(tolEntry.get()),
+            int(NmaxEntry.get()), root, operaciones, errorSeleccionado.get(), atras))
+        calcular.grid()
+    
     elif metodo == "Raices multiples":
-        print("Raices multiples")
+        label = tk.Label(root, text="Raices multiples", font=("Arial", 20))
+        label.grid()
+
+        f = tk.Label(root, text="Ingrese la función")
+        f.grid()
+        fEntry = tk.Entry(root)
+        fEntry.grid()
+
+        primeraDerivada = tk.Label(root, text="Ingrese la primera derivada")
+        primeraDerivada.grid()
+        primeraDerivadaEntry = tk.Entry(root)
+        primeraDerivadaEntry.grid()
+
+        segundaDerivada = tk.Label(root, text="Ingrese la segunda derivada")
+        segundaDerivada.grid()
+        segundaDerivadaEntry = tk.Entry(root)
+        segundaDerivadaEntry.grid()
+
+        x0 = tk.Label(root, text="Ingrese el valor de x0")
+        x0.grid()
+        x0Entry = tk.Entry(root)
+        x0Entry.grid()
+
+        tol = tk.Label(root, text="Ingrese el valor de la tolerancia")
+        tol.grid()
+        tolEntry = tk.Entry(root)
+        tolEntry.grid()
+
+        Nmax = tk.Label(root, text="Ingrese el valor de Nmax")
+        Nmax.grid()
+        NmaxEntry = tk.Entry(root)
+        NmaxEntry.grid()
+        
+        dropdown = tk.OptionMenu(root, errorSeleccionado, *error)
+        dropdown.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: raices_multiples(
+            fEntry.get(), primeraDerivadaEntry.get(), segundaDerivadaEntry.get(), float(x0Entry.get()), 
+            float(tolEntry.get()), int(NmaxEntry.get()), root, operaciones, errorSeleccionado.get(), atras))
+        calcular.grid()
+
     elif metodo == "Secante":
-        print("Secante")
+        label = tk.Label(root, text="Secante", font=("Arial", 20))
+        label.grid()
+
+        f = tk.Label(root, text="Ingrese la función")
+        f.grid()
+        fEntry = tk.Entry(root)
+        fEntry.grid()
+
+        x0 = tk.Label(root, text="Ingrese el primer valor (x0)")
+        x0.grid()
+        x0Entry = tk.Entry(root)
+        x0Entry.grid()
+
+        x1 = tk.Label(root, text="Ingrese el segundo valor (x1)")
+        x1.grid()
+        x1Entry = tk.Entry(root)
+        x1Entry.grid()
+
+        tol = tk.Label(root, text="Ingrese el valor de la tolerancia")
+        tol.grid()
+        tolEntry = tk.Entry(root)
+        tolEntry.grid()
+
+        Nmax = tk.Label(root, text="Ingrese el valor de Nmax")
+        Nmax.grid()
+        NmaxEntry = tk.Entry(root)
+        NmaxEntry.grid()
+
+        dropdown = tk.OptionMenu(root, errorSeleccionado, *error)
+        dropdown.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: secante(
+            fEntry.get(), float(x0Entry.get()), float(x1Entry.get()), float(tolEntry.get()),
+            int(NmaxEntry.get()), root, operaciones, errorSeleccionado.get(), atras))
+        calcular.grid()
+    
     elif metodo == "Regla falsa":
-        print("Regla falsa")
+        label = tk.Label(root, text="Regla falsa", font=("Arial", 20))
+        label.grid()
+
+        funcion = tk.Label(root, text="Ingrese la función")
+        funcion.grid()
+        funcionEntry = tk.Entry(root)
+        funcionEntry.grid()
+
+        a = tk.Label(root, text="Ingrese el valor de a")
+        a.grid()
+        aEntry = tk.Entry(root)
+        aEntry.grid()
+
+        b = tk.Label(root, text="Ingrese el valor de b")
+        b.grid()
+        bEntry = tk.Entry(root)
+        bEntry.grid()
+
+        tol = tk.Label(root, text="Ingrese el valor de la tolerancia")
+        tol.grid()
+        tolEntry = tk.Entry(root)
+        tolEntry.grid()
+
+        Nmax = tk.Label(root, text="Ingrese el valor de Nmax")
+        Nmax.grid()
+        NmaxEntry = tk.Entry(root)
+        NmaxEntry.grid()
+
+        dropdown = tk.OptionMenu(root, errorSeleccionado, *error)
+        dropdown.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=lambda: regla_falsa(
+            funcionEntry.get(), float(aEntry.get()), float(bEntry.get()), float(tolEntry.get()),
+            int(NmaxEntry.get()), root, operaciones, errorSeleccionado.get(), atras))
+        calcular.grid()
+
     elif metodo == "Cholesky":
         def calcularCholesky():
             A_rows = A_entry.get().split(';')
