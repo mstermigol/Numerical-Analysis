@@ -18,17 +18,19 @@
 
 Cuando se escriba una función, los equivalentes a estas expresiones son los siguientes:
 
-- e^x=exp⁡(x)
-- ln⁡x=ln(x)
-- √x=sqrt(x)
-- ∛x=thirdroot(x)
-- log_10⁡x=log⁡(x)
-- sin⁡x=sin(x)
-- cos⁡x=cos(x)
-- tanx=tan⁡(x)
+- $ e^x=exp⁡(x) $
+- $ln⁡x=ln(x)$
+- $√x=sqrt(x)$
+- $∛x=thirdroot(x)$
+- $log⁡x=log⁡(x)$
+- $sin⁡x=sin(x)$
+- $cos⁡x=cos(x)$
+- $tanx=tan⁡(x)$
 
 Si se van a usar decimales se manejan con el “.” (punto) así _1.5_
+
 En las matrices la manera de ingresar la matriz A es, cada elemento de la fila separado por “,” y cuando se va a pasar a la siguiente fila se pone un “;”. Ejemplo: _2,3;1,2_ (Lo que resulta en una matriz 2X2 donde 2 y 3 son los valores de la fila uno de izquierda a derecha y, 1 y 2 son los elementos de la segunda fila).
+
 Los métodos se distribuyeron de la siguiente manera:
 
 **Miguel Sosa**
@@ -66,7 +68,9 @@ Los métodos se distribuyeron de la siguiente manera:
 ### Anotaciones Lagrange
 
 A la hora de ingresar los valores, estos se tienen que ingresar separados por “,” (coma) así _1,2,3,4_ además que todos los valores deben ser enteros o flotantes (nada de caracteres)
-Si se quiere extrapolar seguramente dará un valor muy alejado del real, así que se debe evitar extrapolar con este método
+
+Si se quiere extrapolar seguramente dará un valor muy alejado
+del real, así que se debe evitar extrapolar con este método
 
 ## Seudocodigos
 
