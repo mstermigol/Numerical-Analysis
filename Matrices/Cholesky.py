@@ -1,6 +1,6 @@
 import numpy as np
-from sustregr import sustregr
-from sustprgr import sustprgr
+from Matrices.sustregr import sustregr
+from Matrices.sustprgr import sustprgr
 
 
 def cholesky(A, b):

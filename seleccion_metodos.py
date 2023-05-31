@@ -1,4 +1,5 @@
 import tkinter as tk
+from Matrices.Cholesky import cholesky
 from Raices.biseccion import biseccion
 from Raices.busquedas_incrementales import busquedas
 from Interpolacion.Lagrange import lagrange
@@ -63,7 +64,7 @@ inicio(root)
 
 operaciones = {"exp": exp, "ln(x)": log, "log(x)": log10,
                "sin(x)": sin, "cos(x)": cos, "tan(x)": tan,
-               "sqrt(x)": sqrt, "thirdroot(x)": lambda x: x**(1/3),}
+               "sqrt(x)": sqrt, "thirdroot(x)": lambda x: x**(1/3), }
 
 error = ["Error absoluto", "Error relativo"]
 
@@ -185,7 +186,41 @@ def definirMetodo(root, metodo):
     elif metodo == "Regla falsa":
         print("Regla falsa")
     elif metodo == "Cholesky":
-        print("Cholesky")
+        def calcularCholesky():
+            A_rows = A_entry.get().split(';')
+            A_values = [list(map(float, row.split(','))) for row in A_rows]
+            A = np.array(A_values)
+
+            b = np.array(list(map(float, b_entry.get().split(','))))
+
+            x = cholesky(A, b)
+
+            x_result.config(text="Valores de x: " + str(x))
+
+        label = tk.Label(root, text="Cholesky", font=("Arial", 20))
+        label.grid()
+
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label.grid()
+        A_entry = tk.Entry(root)
+        A_entry.grid()
+
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
+        b_label.grid()
+        b_entry = tk.Entry(root)
+        b_entry.grid()
+
+        calcular = tk.Button(root, text="Calcular", command=calcularCholesky)
+        calcular.grid()
+
+        result_label = tk.Label(root, text="Resultados:")
+        result_label.grid()
+
+        x_result = tk.Label(root, text="Valores de x:")
+        x_result.grid()
+
     elif metodo == "Crout":
         print("Crout")
     elif metodo == "Doolittle":
@@ -203,15 +238,18 @@ def definirMetodo(root, metodo):
             # Mostrar los resultados en la interfaz de Tkinter
             x_result.config(text="Valores de x: " + str(x))
 
-        label = tk.Label(root, text="Eliminación Gaussiana", font=("Arial", 20))
+        label = tk.Label(root, text="Eliminación Gaussiana",
+                         font=("Arial", 20))
         label.grid()
 
-        A_label = tk.Label(root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
         A_label.grid()
         A_entry = tk.Entry(root)
         A_entry.grid()
 
-        b_label = tk.Label(root, text="Ingrese el vector b (separado por comas):")
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
         b_label.grid()
         b_entry = tk.Entry(root)
         b_entry.grid()
@@ -237,16 +275,19 @@ def definirMetodo(root, metodo):
 
             # Mostrar los resultados en la interfaz de Tkinter
             x_result.config(text="Valores de x: " + str(x))
-        
-        label = tk.Label(root, text="Eliminación Gaussiana con pivoteo parcial", font=("Arial", 20))
+
+        label = tk.Label(
+            root, text="Eliminación Gaussiana con pivoteo parcial", font=("Arial", 20))
         label.grid()
 
-        A_label = tk.Label(root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
         A_label.grid()
         A_entry = tk.Entry(root)
         A_entry.grid()
 
-        b_label = tk.Label(root, text="Ingrese el vector b (separado por comas):")
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
         b_label.grid()
         b_entry = tk.Entry(root)
         b_entry.grid()
@@ -260,7 +301,7 @@ def definirMetodo(root, metodo):
 
         x_result = tk.Label(root, text="Valores de x:")
         x_result.grid()
-        
+
         print("Gauss con pivoteo parcial")
     elif metodo == "Gauss con pivoteo total":
         print("Gauss con pivoteo total")
@@ -277,23 +318,27 @@ def definirMetodo(root, metodo):
             result = gseidel(A, b, X0, tol, Nmax)
 
             x_result.config(text="Valores de x: " + str(result[0]))
-            iter_result.config(text="Número de iteraciones: " + str(result[1]))
+            iter_result.config(
+                text="Número de iteraciones: " + str(result[1]))
             error_result.config(text="Error: " + str(result[2]))
 
         label = tk.Label(root, text="Gauss-Seidel", font=("Arial", 20))
         label.grid()
 
-        A_label = tk.Label(root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
         A_label.grid()
         A_entry = tk.Entry(root)
         A_entry.grid()
 
-        b_label = tk.Label(root, text="Ingrese el vector b (separado por comas):")
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
         b_label.grid()
         b_entry = tk.Entry(root)
         b_entry.grid()
 
-        X0_label = tk.Label(root, text="Ingrese la aproximación inicial X0 (separado por comas):")
+        X0_label = tk.Label(
+            root, text="Ingrese la aproximación inicial X0 (separado por comas):")
         X0_label.grid()
         X0_entry = tk.Entry(root)
         X0_entry.grid()
@@ -303,7 +348,8 @@ def definirMetodo(root, metodo):
         tol_entry = tk.Entry(root)
         tol_entry.grid()
 
-        Nmax_label = tk.Label(root, text="Ingrese el número máximo de iteraciones (Nmax):")
+        Nmax_label = tk.Label(
+            root, text="Ingrese el número máximo de iteraciones (Nmax):")
         Nmax_label.grid()
         Nmax_entry = tk.Entry(root)
         Nmax_entry.grid()
@@ -337,23 +383,27 @@ def definirMetodo(root, metodo):
             result = jacobi(A, b, X0, tol, Nmax)
 
             x_result.config(text="Valores de x: " + str(result[0]))
-            iter_result.config(text="Número de iteraciones: " + str(result[1]))
+            iter_result.config(
+                text="Número de iteraciones: " + str(result[1]))
             error_result.config(text="Error: " + str(result[2]))
 
         label = tk.Label(root, text="Jacobi", font=("Arial", 20))
         label.grid()
 
-        A_label = tk.Label(root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
         A_label.grid()
         A_entry = tk.Entry(root)
         A_entry.grid()
 
-        b_label = tk.Label(root, text="Ingrese el vector b (separado por comas):")
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
         b_label.grid()
         b_entry = tk.Entry(root)
         b_entry.grid()
 
-        X0_label = tk.Label(root, text="Ingrese la aproximación inicial X0 (separado por comas):")
+        X0_label = tk.Label(
+            root, text="Ingrese la aproximación inicial X0 (separado por comas):")
         X0_label.grid()
         X0_entry = tk.Entry(root)
         X0_entry.grid()
@@ -363,7 +413,8 @@ def definirMetodo(root, metodo):
         tol_entry = tk.Entry(root)
         tol_entry.grid()
 
-        Nmax_label = tk.Label(root, text="Ingrese el número máximo de iteraciones (Nmax):")
+        Nmax_label = tk.Label(
+            root, text="Ingrese el número máximo de iteraciones (Nmax):")
         Nmax_label.grid()
         Nmax_entry = tk.Entry(root)
         Nmax_entry.grid()
@@ -399,12 +450,14 @@ def definirMetodo(root, metodo):
         label = tk.Label(root, text="LU parcial", font=("Arial", 20))
         label.grid()
 
-        A_label = tk.Label(root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
+        A_label = tk.Label(
+            root, text="Ingrese la matriz A (separada por comas, filas por punto y coma):")
         A_label.grid()
         A_entry = tk.Entry(root)
         A_entry.grid()
 
-        b_label = tk.Label(root, text="Ingrese el vector b (separado por comas):")
+        b_label = tk.Label(
+            root, text="Ingrese el vector b (separado por comas):")
         b_label.grid()
         b_entry = tk.Entry(root)
         b_entry.grid()
