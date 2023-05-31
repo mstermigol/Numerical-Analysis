@@ -3,7 +3,7 @@ from Matrices.sustregr import sustregr
 from Matrices.sustprgr import sustprgr
 
 
-def Crout(A, b):
+def crout(A, b):
     n = np.size(A, 0)
     L = np.eye(n)
     U = np.eye(n)
@@ -19,12 +19,3 @@ def Crout(A, b):
     x = sustregr(U, z)
 
     return x
-
-
-A = np.array([[1.043, -0.082, -0.088],
-              [-0.011, 0.527, -0.104],
-              [-0.137, -0.077, 0.362]])
-
-b = np.array([1, 0, 0])
-
-print(Crout(A, b))
