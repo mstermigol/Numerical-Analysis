@@ -31,7 +31,7 @@
 
 Cuando se escriba una función, los equivalentes a estas expresiones son los siguientes:
 
-- $ e^x=exp⁡(x) $
+- $e^x=exp⁡(x)$
 - $ln⁡x=ln(x)$
 - $√x=sqrt(x)$
 - $∛x=thirdroot(x)$
